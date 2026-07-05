@@ -10,7 +10,8 @@ interface OrderDetails {
   orderId: number;
   email: string;
   total: number;
-  discountApplied: number;
+  discountPercent: number;
+  downloads: { title: string; url: string }[];
 }
 
 function SuccessContent() {
@@ -80,10 +81,10 @@ function SuccessContent() {
 
       <h1 className="font-serif text-4xl font-bold mb-3">Order Confirmed</h1>
       <p className="text-[#7a7060] text-sm mb-8 max-w-sm">
-        Thank you! Check your email for the download link.
+        Thank you! Your downloads are ready below.
       </p>
 
-      <div className="border border-[#ddd5c4] px-8 py-6 mb-10 space-y-2 min-w-64 text-sm">
+      <div className="border border-[#ddd5c4] px-8 py-6 mb-6 space-y-2 min-w-64 text-sm">
         <div className="flex justify-between gap-8">
           <span className="text-[#7a7060]">Order #</span>
           <span className="font-medium">{order.orderId}</span>
@@ -94,10 +95,10 @@ function SuccessContent() {
             <span className="font-medium truncate max-w-[180px]">{order.email}</span>
           </div>
         )}
-        {order.discountApplied > 0 && (
+        {order.discountPercent > 0 && (
           <div className="flex justify-between gap-8 text-green-700">
-            <span>Discount saved</span>
-            <span className="font-medium">−${order.discountApplied.toFixed(2)}</span>
+            <span>Bundle discount</span>
+            <span className="font-medium">{order.discountPercent}% off</span>
           </div>
         )}
         <div className="flex justify-between gap-8 border-t border-[#ddd5c4] pt-2 font-semibold">
@@ -105,6 +106,25 @@ function SuccessContent() {
           <span>${order.total.toFixed(2)}</span>
         </div>
       </div>
+
+      {order.downloads.length > 0 && (
+        <div className="border border-[#ddd5c4] px-8 py-6 mb-10 space-y-3 min-w-64 w-full max-w-sm text-sm">
+          <p className="text-[10px] uppercase tracking-widest text-[#a09880] text-left">
+            Your downloads
+          </p>
+          {order.downloads.map((d) => (
+            <div key={d.url} className="flex items-center justify-between gap-4">
+              <span className="font-medium text-left truncate">{d.title}</span>
+              <a
+                href={d.url}
+                className="flex-shrink-0 bg-[#1c1a18] text-[#f0e8d8] px-4 py-2 text-[11px] tracking-widest uppercase hover:bg-black transition-colors"
+              >
+                Download
+              </a>
+            </div>
+          ))}
+        </div>
+      )}
 
       <Link
         href="/catalog"

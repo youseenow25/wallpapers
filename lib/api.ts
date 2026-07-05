@@ -40,7 +40,13 @@ export async function createCheckoutSession(
 
 export async function verifyCheckoutSession(
   sessionId: string,
-): Promise<{ orderId: number; email: string; total: number; discountApplied: number }> {
+): Promise<{
+  orderId: number;
+  email: string;
+  total: number;
+  discountPercent: number;
+  downloads: { title: string; url: string }[];
+}> {
   const res = await fetch(`${API}/api/checkout/verify/${sessionId}`);
   if (!res.ok) throw new Error("Payment verification failed");
   return res.json();
