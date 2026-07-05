@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Wallpaper } from "@/lib/types";
+import { coverUrl } from "@/lib/api";
 
 export default function HeroMarquee({ wallpapers }: { wallpapers: Wallpaper[] }) {
   if (!wallpapers.length) return null;
@@ -39,7 +40,7 @@ export default function HeroMarquee({ wallpapers }: { wallpapers: Wallpaper[] })
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={w.cover_image}
+                src={coverUrl(w.id)}
                 alt={w.title}
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
                 className="group-hover:scale-105 transition-transform duration-500"

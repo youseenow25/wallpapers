@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import MonitorDisplay from "./MonitorDisplay";
 import { useCart } from "./CartContext";
-import { createCheckoutSession } from "@/lib/api";
+import { createCheckoutSession, coverUrl } from "@/lib/api";
 import type { Wallpaper } from "@/lib/types";
 
 export default function ProductDetail({ w }: { w: Wallpaper }) {
@@ -176,7 +176,7 @@ export default function ProductDetail({ w }: { w: Wallpaper }) {
         />
         <div className="w-[78%] max-w-[520px] relative z-10">
           <MonitorDisplay
-            src={w.cover_image || "https://picsum.photos/seed/default/900/600"}
+            src={coverUrl(w.id)}
             alt={w.title}
           />
         </div>

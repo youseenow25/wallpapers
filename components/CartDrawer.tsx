@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useCart } from "./CartContext";
-import { createCheckoutSession } from "@/lib/api";
+import { createCheckoutSession, coverUrl } from "@/lib/api";
 
 const DISCOUNT_TIERS = [
   { minItems: 5, percent: 50, label: "5+ items" },
@@ -123,7 +123,7 @@ export default function CartDrawer() {
                 <li key={item.wallpaper.id} className="flex gap-3">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={item.wallpaper.cover_image}
+                    src={coverUrl(item.wallpaper.id)}
                     alt={item.wallpaper.title}
                     className="w-16 h-12 object-cover rounded"
                   />

@@ -4,6 +4,10 @@ const API =
   process.env.NEXT_PUBLIC_API_URL ||
   (typeof window === "undefined" ? "http://localhost:4000" : "");
 
+export function coverUrl(id: number | string): string {
+  return `${API}/api/covers/${id}`;
+}
+
 export async function getWallpapers(): Promise<Wallpaper[]> {
   const res = await fetch(`${API}/api/wallpapers`, { next: { revalidate: 60 } });
   if (!res.ok) throw new Error("Failed to fetch wallpapers");
