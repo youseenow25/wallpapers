@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { Suspense, useEffect, useState, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useCart } from "@/components/CartContext";
@@ -13,7 +13,7 @@ interface OrderDetails {
   discountApplied: number;
 }
 
-export default function SuccessPage() {
+function SuccessContent() {
   const params = useSearchParams();
   const sessionId = params.get("session_id");
   const { clearCart } = useCart();
@@ -80,8 +80,7 @@ export default function SuccessPage() {
 
       <h1 className="font-serif text-4xl font-bold mb-3">Order Confirmed</h1>
       <p className="text-[#7a7060] text-sm mb-8 max-w-sm">
-        Thank you! Your wallpapers are ready. Check your email for the download
-        link.
+        Thank you! Check your email for the download link.
       </p>
 
       <div className="border border-[#ddd5c4] px-8 py-6 mb-10 space-y-2 min-w-64 text-sm">
@@ -114,5 +113,24 @@ export default function SuccessPage() {
         Continue Shopping
       </Link>
     </div>
+  );
+}
+
+export default function SuccessPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center min-h-[80vh]">
+          <div className="flex items-center gap-2 text-[#7a7060] text-sm">
+            <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+            </svg>
+            Loading…
+          </div>
+        </div>
+      }
+    >
+      <SuccessContent />
+    </Suspense>
   );
 }
