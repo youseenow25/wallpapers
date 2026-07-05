@@ -62,7 +62,7 @@ export default function ContactPage() {
         <div className="max-w-screen-xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/logo.png" alt="outbbo" style={{ height: "22px", width: "auto", mixBlendMode: "multiply" }} />
-          <p className="text-xs text-[#7a7060]">© {new Date().getFullYear()} Wallvault. All rights reserved.</p>
+          <p className="text-xs text-[#7a7060]">© {new Date().getFullYear()} outbbo. All rights reserved.</p>
           <a href="mailto:admin@outbbo.com" className="text-xs text-[#7a7060] hover:text-[#1c1a18] transition-colors">
             admin@outbbo.com
           </a>
