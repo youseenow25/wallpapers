@@ -1,3 +1,6 @@
+/* ── Config ─────────────────────────────────────────────────────────────── */
+const API_BASE = location.hostname === 'localhost' ? '' : 'https://api.outbbo.com';
+
 /* ── Auth ───────────────────────────────────────────────────────────────── */
 const token = localStorage.getItem('wv-admin-token');
 if (!token) { location.href = '/admin/login.html'; throw new Error('not authed'); }
@@ -7,7 +10,7 @@ function authHeaders(extra = {}) {
 }
 
 async function apiFetch(path, opts = {}) {
-  const res = await fetch(path, {
+  const res = await fetch(API_BASE + path, {
     ...opts,
     headers: { ...authHeaders(), ...(opts.headers || {}) }
   });
@@ -153,7 +156,7 @@ function setupWallpaperForm() {
     const url = id ? `/api/admin/wallpapers/${id}` : '/api/admin/wallpapers';
 
     try {
-      const res = await fetch(url, { method, headers: authHeaders(), body: fd });
+      const res = await fetch(API_BASE + url, { method, headers: authHeaders(), body: fd });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Save failed');
       closeFormModal();
