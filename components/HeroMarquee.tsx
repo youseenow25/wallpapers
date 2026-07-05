@@ -35,7 +35,7 @@ export default function HeroMarquee({ wallpapers }: { wallpapers: Wallpaper[] })
             <Link
               key={`${w.id}-${i}`}
               href={`/product/${w.id}`}
-              className="group flex-shrink-0 watermark"
+              className="group flex-shrink-0 overflow-hidden"
               style={{ width: "260px", height: "170px", display: "block", borderRadius: "6px" }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
