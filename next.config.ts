@@ -12,11 +12,6 @@ const nextConfig: NextConfig = {
   },
   async rewrites() {
     return [
-      { source: "/admin",               destination: `${BACKEND}/admin/login.html` },
-      { source: "/admin/",              destination: `${BACKEND}/admin/index.html` },
-      { source: "/admin/:path*",        destination: `${BACKEND}/admin/:path*` },
-      { source: "/css/:path*",          destination: `${BACKEND}/css/:path*` },
-      { source: "/js/:path*",           destination: `${BACKEND}/js/:path*` },
       { source: "/uploads/:path*",      destination: `${BACKEND}/uploads/:path*` },
       { source: "/api/admin/:path*",    destination: `${BACKEND}/api/admin/:path*` },
       { source: "/api/download/:path*", destination: `${BACKEND}/api/download/:path*` },
