@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, DM_Sans } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 import { CartProvider } from "@/components/CartContext";
 import Nav from "@/components/Nav";
 import CartDrawer from "@/components/CartDrawer";
@@ -35,6 +36,7 @@ export default function RootLayout({
           <main className="pt-14">{children}</main>
           <CartDrawer />
         </CartProvider>
+        <Analytics />
       </body>
     </html>
   );
