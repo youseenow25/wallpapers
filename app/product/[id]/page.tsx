@@ -1,5 +1,6 @@
 import { getWallpaper, getWallpapers } from "@/lib/api";
 import ProductDetail from "@/components/ProductDetail";
+import BundleBanner from "@/components/BundleBanner";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
@@ -27,7 +28,18 @@ export default async function ProductPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const w = await getWallpaper(id).catch(() => null);
+  const [w, allWallpapers] = await Promise.all([
+    getWallpaper(id).catch(() => null),
+    getWallpapers().catch(() => []),
+  ]);
   if (!w) notFound();
-  return <ProductDetail w={w} />;
+  const totalRetailValue = allWallpapers.reduce((s, wp) => s + Number(wp.price), 0);
+  return (
+    <>
+      <ProductDetail w={w} />
+      {allWallpapers.length > 0 && (
+        <BundleBanner wallpaperCount={allWallpapers.length} totalValue={totalRetailValue} />
+      )}
+    </>
+  );
 }

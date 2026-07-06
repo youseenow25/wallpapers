@@ -2,16 +2,23 @@ import Link from "next/link";
 import { getWallpapers } from "@/lib/api";
 import ProductCard from "@/components/ProductCard";
 import HeroMarquee from "@/components/HeroMarquee";
+import BundleBanner from "@/components/BundleBanner";
 
 export default async function HomePage() {
   const wallpapers = await getWallpapers().catch(() => []);
   const featured = wallpapers.filter((w) => w.featured).slice(0, 4);
   const latest = wallpapers.filter((w) => !w.featured).slice(0, 4);
+  const totalRetailValue = wallpapers.reduce((s, w) => s + Number(w.price), 0);
 
   return (
     <>
       {/* Marquee hero */}
       <HeroMarquee wallpapers={wallpapers} />
+
+      {/* Bundle offer */}
+      {wallpapers.length > 0 && (
+        <BundleBanner wallpaperCount={wallpapers.length} totalValue={totalRetailValue} />
+      )}
 
       {/* Featured */}
       {featured.length > 0 && (

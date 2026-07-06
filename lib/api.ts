@@ -38,6 +38,21 @@ export async function createCheckoutSession(
   return res.json();
 }
 
+export async function createAllBundleSession(
+  email?: string,
+): Promise<{ url: string }> {
+  const res = await fetch(`${API}/api/checkout/all-bundle`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email }),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error || "Checkout failed");
+  }
+  return res.json();
+}
+
 export async function verifyCheckoutSession(
   sessionId: string,
 ): Promise<{
