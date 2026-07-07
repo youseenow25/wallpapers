@@ -29,13 +29,13 @@ export default function BundleBanner({
 
   return (
     <section className="bg-[#1c1a18] text-[#f0e8d8]">
-      <div className="max-w-screen-xl mx-auto px-6 py-14 flex flex-col sm:flex-row items-center justify-between gap-8">
+      <div className="max-w-screen-xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-6">
         {/* Copy */}
         <div className="text-center sm:text-left">
-          <p className="text-xs uppercase tracking-[0.2em] text-[#a09880] mb-2">
+          <p className="text-xs uppercase tracking-[0.2em] text-[#a09880] mb-1">
             Limited offer
           </p>
-          <h2 className="font-serif text-3xl sm:text-4xl font-semibold leading-tight mb-3">
+          <h2 className="font-serif text-2xl sm:text-3xl font-semibold leading-tight mb-2">
             Get every wallpaper.<br />
             <span className="text-[#f0c060]">All {wallpaperCount} titles, $24.99.</span>
           </h2>
@@ -48,9 +48,9 @@ export default function BundleBanner({
         </div>
 
         {/* CTA */}
-        <div className="flex flex-col items-center gap-3 shrink-0">
-          <div className="text-center mb-1">
-            <span className="text-4xl font-serif font-bold">$24.99</span>
+        <div className="flex flex-col items-center gap-2 shrink-0">
+          <div className="text-center">
+            <span className="text-3xl font-serif font-bold">$24.99</span>
             {savings > 0 && (
               <p className="text-xs text-[#a09880] mt-0.5">
                 <span className="line-through">${totalValue.toFixed(2)}</span> retail value
