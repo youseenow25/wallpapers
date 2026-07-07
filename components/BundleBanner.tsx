@@ -29,13 +29,13 @@ export default function BundleBanner({
 
   return (
     <section className="bg-[#1c1a18] text-[#f0e8d8]">
-      <div className="max-w-screen-xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div className="max-w-screen-xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
         {/* Copy */}
         <div className="text-center sm:text-left">
-          <p className="text-xs uppercase tracking-[0.2em] text-[#a09880] mb-1">
+          <p className="text-xs uppercase tracking-[0.2em] text-[#a09880] mb-0.5">
             Limited offer
           </p>
-          <h2 className="font-serif text-2xl sm:text-3xl font-semibold leading-tight mb-2">
+          <h2 className="font-serif text-xl sm:text-2xl font-semibold leading-tight mb-1">
             Get every wallpaper.<br />
             <span className="text-[#f0c060]">All {wallpaperCount} titles, $24.99.</span>
           </h2>
@@ -48,9 +48,9 @@ export default function BundleBanner({
         </div>
 
         {/* CTA */}
-        <div className="flex flex-col items-center gap-2 shrink-0">
+        <div className="flex flex-col items-center gap-1.5 shrink-0">
           <div className="text-center">
-            <span className="text-3xl font-serif font-bold">$24.99</span>
+            <span className="text-2xl font-serif font-bold">$24.99</span>
             {savings > 0 && (
               <p className="text-xs text-[#a09880] mt-0.5">
                 <span className="line-through">${totalValue.toFixed(2)}</span> retail value
@@ -61,7 +61,7 @@ export default function BundleBanner({
           <button
             onClick={handleClick}
             disabled={loading}
-            className="bg-[#f0c060] text-[#1c1a18] px-8 py-3.5 text-sm font-semibold tracking-wide hover:bg-[#f5d080] transition-colors disabled:opacity-60 flex items-center gap-2 whitespace-nowrap"
+            className="bg-[#f0c060] text-[#1c1a18] px-6 py-2.5 text-sm font-semibold tracking-wide hover:bg-[#f5d080] transition-colors disabled:opacity-60 flex items-center gap-2 whitespace-nowrap"
           >
             {loading ? (
               <>
