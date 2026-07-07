@@ -39,11 +39,8 @@ export default function BundleBanner({
             Get every wallpaper.<br />
             <span className="text-[#f0c060]">All {wallpaperCount} titles, $24.99.</span>
           </h2>
-          <p className="text-sm text-[#c4b8a8] max-w-sm">
-            The complete collection in one purchase — download anytime, keep forever.
-            {savings > 0 && (
-              <> Save <span className="text-[#f0e8d8] font-medium">${savings}+</span> vs. buying individually.</>
-            )}
+          <p className="text-xs text-[#c4b8a8] whitespace-nowrap">
+            One purchase — download anytime, keep forever.{savings > 0 && <> Save <span className="text-[#f0e8d8] font-medium">${savings}+</span> vs. buying individually.</>}
           </p>
         </div>
 
