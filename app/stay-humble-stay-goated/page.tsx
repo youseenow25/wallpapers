@@ -28,9 +28,6 @@ export const metadata: Metadata = {
     title: "Stay Humble Stay Goated Wallpaper | outbbo",
     description: "Motivational wallpaper for iPhone and desktop.",
   },
-  alternates: {
-    canonical: "https://www.outbbo.com/product/9",
-  },
 };
 
 export default function StayHumbleStayGoatedPage() {

@@ -28,9 +28,6 @@ export const metadata: Metadata = {
     title: "The World is Yours Wallpaper | outbbo",
     description: "Iconic inspirational wallpaper for iPhone and desktop.",
   },
-  alternates: {
-    canonical: "https://www.outbbo.com/product/13",
-  },
 };
 
 export default function TheWorldIsYoursPage() {

@@ -27,9 +27,6 @@ export const metadata: Metadata = {
     title: "Life is a Joke Wallpaper | outbbo",
     description: "Bold humorous wallpaper for iPhone and desktop.",
   },
-  alternates: {
-    canonical: "https://www.outbbo.com/product/25",
-  },
 };
 
 export default function LifeIsAJokeWallpaperPage() {
