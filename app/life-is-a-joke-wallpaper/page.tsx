@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import SeoRedirectPage from "@/components/SeoRedirectPage";
 
 export const metadata: Metadata = {
-  title: "Life is a Joke Wallpaper — Download for iPhone & Desktop | outbbo",
+  title: "Life is a Joke Wallpaper — Download for iPhone & Desktop | Outbbo",
   description:
-    "Download the 'Life is a Joke' premium digital wallpaper by outbbo. Bold, humorous design perfect for iPhone, Android, and desktop. High-resolution instant download.",
+    "Download the 'Life is a Joke' premium digital wallpaper by Outbbo. Bold, humorous design perfect for iPhone, Android, and desktop. High-resolution instant download.",
   keywords: [
     "life is a joke wallpaper",
     "funny wallpaper",
@@ -12,19 +12,19 @@ export const metadata: Metadata = {
     "iPhone wallpaper",
     "desktop wallpaper",
     "digital wallpaper download",
-    "outbbo wallpaper",
+    "Outbbo wallpaper",
   ],
   openGraph: {
-    title: "Life is a Joke Wallpaper | outbbo",
+    title: "Life is a Joke Wallpaper | Outbbo",
     description:
       "Bold humorous wallpaper for iPhone and desktop. High-resolution instant download.",
     url: "https://www.outbbo.com/product/25",
-    siteName: "outbbo",
+    siteName: "Outbbo",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Life is a Joke Wallpaper | outbbo",
+    title: "Life is a Joke Wallpaper | Outbbo",
     description: "Bold humorous wallpaper for iPhone and desktop.",
   },
 };

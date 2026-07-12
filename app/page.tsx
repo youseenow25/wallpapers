@@ -68,9 +68,9 @@ export default async function HomePage() {
       <footer id="contact" className="border-t border-[#ddd5c4] px-6 py-10 mt-auto">
         <div className="max-w-screen-xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.png" alt="outbbo" style={{ height: "22px", width: "auto", mixBlendMode: "multiply" }} />
+          <img src="/logo.png" alt="Outbbo" style={{ height: "22px", width: "auto", mixBlendMode: "multiply" }} />
           <p className="text-xs text-[#7a7060]">
-            © {new Date().getFullYear()} outbbo. All rights reserved.
+            © {new Date().getFullYear()} Outbbo. All rights reserved.
           </p>
           <a
             href="mailto:admin@outbbo.com"

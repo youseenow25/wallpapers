@@ -30,7 +30,7 @@ export default function SeoRedirectPage({ productUrl, title, tagline, descriptio
   return (
     <div className="min-h-screen bg-[#faf8f5] flex flex-col items-center justify-center px-6 py-20">
       <div className="max-w-xl w-full text-center">
-        <p className="text-xs uppercase tracking-widest text-[#7a7060] mb-4">outbbo — Premium Digital Wallpapers</p>
+        <p className="text-xs uppercase tracking-widest text-[#7a7060] mb-4">Outbbo — Premium Digital Wallpapers</p>
         <h1 className="font-serif text-4xl sm:text-5xl font-semibold text-[#1c1a18] mb-4 leading-tight">
           {title}
         </h1>

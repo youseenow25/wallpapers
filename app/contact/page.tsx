@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Contact — WALLVAULT",
-  description: "Get in touch with the Wallvault team.",
+  title: "Contact — Outbbo",
+  description: "Get in touch with the Outbbo team.",
 };
 
 export default function ContactPage() {
@@ -61,8 +61,8 @@ export default function ContactPage() {
       <footer className="border-t border-[#ddd5c4] px-6 py-10">
         <div className="max-w-screen-xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.png" alt="outbbo" style={{ height: "22px", width: "auto", mixBlendMode: "multiply" }} />
-          <p className="text-xs text-[#7a7060]">© {new Date().getFullYear()} outbbo. All rights reserved.</p>
+          <img src="/logo.png" alt="Outbbo" style={{ height: "22px", width: "auto", mixBlendMode: "multiply" }} />
+          <p className="text-xs text-[#7a7060]">© {new Date().getFullYear()} Outbbo. All rights reserved.</p>
           <a href="mailto:admin@outbbo.com" className="text-xs text-[#7a7060] hover:text-[#1c1a18] transition-colors">
             admin@outbbo.com
           </a>

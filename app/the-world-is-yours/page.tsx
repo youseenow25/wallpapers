@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import SeoRedirectPage from "@/components/SeoRedirectPage";
 
 export const metadata: Metadata = {
-  title: "The World is Yours Wallpaper — Download for iPhone & Desktop | outbbo",
+  title: "The World is Yours Wallpaper — Download for iPhone & Desktop | Outbbo",
   description:
-    "Download 'The World is Yours' premium digital wallpaper by outbbo. Iconic inspirational design for iPhone, Android, and desktop. High-resolution instant download.",
+    "Download 'The World is Yours' premium digital wallpaper by Outbbo. Iconic inspirational design for iPhone, Android, and desktop. High-resolution instant download.",
   keywords: [
     "the world is yours wallpaper",
     "scarface wallpaper",
@@ -13,19 +13,19 @@ export const metadata: Metadata = {
     "iPhone wallpaper",
     "desktop wallpaper",
     "digital wallpaper download",
-    "outbbo wallpaper",
+    "Outbbo wallpaper",
   ],
   openGraph: {
-    title: "The World is Yours Wallpaper | outbbo",
+    title: "The World is Yours Wallpaper | Outbbo",
     description:
       "Iconic inspirational wallpaper for iPhone and desktop. High-resolution instant download.",
     url: "https://www.outbbo.com/product/13",
-    siteName: "outbbo",
+    siteName: "Outbbo",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "The World is Yours Wallpaper | outbbo",
+    title: "The World is Yours Wallpaper | Outbbo",
     description: "Iconic inspirational wallpaper for iPhone and desktop.",
   },
 };

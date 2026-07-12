@@ -17,7 +17,7 @@ export async function generateMetadata({
   const w = await getWallpaper(id).catch(() => null);
   if (!w) return { title: "Wallpaper not found" };
   return {
-    title: `${w.title} — outbbo`,
+    title: `${w.title} — Outbbo`,
     description: w.description,
   };
 }

@@ -19,7 +19,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "outbbo — Premium Digital Wallpapers",
+  title: "Outbbo — Premium Digital Wallpapers",
   description: "Handpicked premium wallpapers for desktop and mobile.",
   icons: {
     icon: [

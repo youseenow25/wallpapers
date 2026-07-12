@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import SeoRedirectPage from "@/components/SeoRedirectPage";
 
 export const metadata: Metadata = {
-  title: "Stay Humble Stay Goated Wallpaper — Download for iPhone & Desktop | outbbo",
+  title: "Stay Humble Stay Goated Wallpaper — Download for iPhone & Desktop | Outbbo",
   description:
-    "Download the 'Stay Humble Stay Goated' premium digital wallpaper by outbbo. Motivational design for iPhone, Android, and desktop. High-resolution instant download.",
+    "Download the 'Stay Humble Stay Goated' premium digital wallpaper by Outbbo. Motivational design for iPhone, Android, and desktop. High-resolution instant download.",
   keywords: [
     "stay humble stay goated wallpaper",
     "goated wallpaper",
@@ -13,19 +13,19 @@ export const metadata: Metadata = {
     "iPhone wallpaper",
     "desktop wallpaper",
     "digital wallpaper download",
-    "outbbo wallpaper",
+    "Outbbo wallpaper",
   ],
   openGraph: {
-    title: "Stay Humble Stay Goated Wallpaper | outbbo",
+    title: "Stay Humble Stay Goated Wallpaper | Outbbo",
     description:
       "Motivational wallpaper for iPhone and desktop. High-resolution instant download.",
     url: "https://www.outbbo.com/product/9",
-    siteName: "outbbo",
+    siteName: "Outbbo",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Stay Humble Stay Goated Wallpaper | outbbo",
+    title: "Stay Humble Stay Goated Wallpaper | Outbbo",
     description: "Motivational wallpaper for iPhone and desktop.",
   },
 };
