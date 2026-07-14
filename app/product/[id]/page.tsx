@@ -16,9 +16,34 @@ export async function generateMetadata({
   const { id } = await params;
   const w = await getWallpaper(id).catch(() => null);
   if (!w) return { title: "Wallpaper not found" };
+  const title = `${w.title} Wallpaper — Download for Mac & Desktop | Outbbo`;
+  const description = `Download "${w.title}" — a premium oil painting style digital wallpaper by Outbbo. High-resolution, optimised for MacBook and desktop displays. Instant download.`;
+  const url = `https://www.outbbo.com/product/${id}`;
   return {
-    title: `${w.title} — Outbbo`,
-    description: w.description,
+    title,
+    description,
+    keywords: [
+      `${w.title.toLowerCase()} wallpaper`,
+      "oil painting wallpaper",
+      "premium desktop wallpaper",
+      "MacBook wallpaper",
+      "digital wallpaper download",
+      "Outbbo wallpaper",
+      ...(w.tags ? w.tags.split(",").map((t: string) => `${t.trim()} wallpaper`) : []),
+    ],
+    alternates: { canonical: url },
+    openGraph: {
+      title: `${w.title} Wallpaper | Outbbo`,
+      description,
+      url,
+      siteName: "Outbbo",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${w.title} Wallpaper | Outbbo`,
+      description,
+    },
   };
 }
 

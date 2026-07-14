@@ -15,12 +15,21 @@ export default function CatalogClient({ wallpapers }: { wallpapers: Wallpaper[] 
     ),
   ).sort();
 
-  const filtered =
+  const BOTTOM_IDS = new Set([27, 28, 29, 30, 31]);
+
+  const sortToBottom = (list: Wallpaper[]) => {
+    const top = list.filter((w) => !BOTTOM_IDS.has(w.id));
+    const bottom = list.filter((w) => BOTTOM_IDS.has(w.id));
+    return [...top, ...bottom];
+  };
+
+  const filtered = sortToBottom(
     tag === "all"
       ? wallpapers
       : wallpapers.filter((w) =>
           w.tags?.split(",").map((t) => t.trim()).includes(tag),
-        );
+        ),
+  );
 
   return (
     <div className="max-w-screen-xl mx-auto px-6 py-16">
