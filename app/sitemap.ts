@@ -25,9 +25,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const wallpapers = await getWallpapers().catch(() => []);
 
   const staticPages: MetadataRoute.Sitemap = [
-    { url: BASE, lastModified: new Date(), changeFrequency: "daily", priority: 1 },
-    { url: `${BASE}/catalog`, lastModified: new Date(), changeFrequency: "daily", priority: 0.9 },
-    { url: `${BASE}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.4 },
+    { url: BASE, lastModified: new Date("2026-07-14"), changeFrequency: "daily", priority: 1 },
+    { url: `${BASE}/catalog`, lastModified: new Date("2026-07-14"), changeFrequency: "daily", priority: 0.9 },
+    { url: `${BASE}/contact`, lastModified: new Date("2026-07-14"), changeFrequency: "monthly", priority: 0.4 },
   ];
 
   const productPages: MetadataRoute.Sitemap = wallpapers.map((w) => ({
@@ -39,7 +39,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const seoPages: MetadataRoute.Sitemap = SEO_SLUGS.map((slug) => ({
     url: `${BASE}/${slug}`,
-    lastModified: new Date(),
+    lastModified: new Date("2026-07-14"),
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
