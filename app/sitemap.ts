@@ -3,6 +3,10 @@ import { getWallpapers } from "@/lib/api";
 
 const BASE = "https://www.outbbo.com";
 
+// Regenerate the sitemap at most once a minute so newly uploaded wallpapers
+// appear without needing a full redeploy.
+export const revalidate = 60;
+
 const SEO_SLUGS = [
   "stay-humble-stay-goated",
   "life-is-a-joke-wallpaper",
