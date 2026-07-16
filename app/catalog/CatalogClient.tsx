@@ -4,8 +4,11 @@ import { useState } from "react";
 import type { Wallpaper } from "@/lib/types";
 import ProductCard from "@/components/ProductCard";
 
+const COLLAPSED_TAG_COUNT = 12;
+
 export default function CatalogClient({ wallpapers }: { wallpapers: Wallpaper[] }) {
   const [tag, setTag] = useState<string>("all");
+  const [showAllTags, setShowAllTags] = useState(false);
 
   const allTags = Array.from(
     new Set(
@@ -14,6 +17,8 @@ export default function CatalogClient({ wallpapers }: { wallpapers: Wallpaper[] 
       ),
     ),
   ).sort();
+
+  const visibleTags = showAllTags ? allTags : allTags.slice(0, COLLAPSED_TAG_COUNT);
 
   const BOTTOM_IDS = new Set([27, 28, 29, 30, 31]);
 
@@ -50,7 +55,7 @@ export default function CatalogClient({ wallpapers }: { wallpapers: Wallpaper[] 
           >
             All
           </button>
-          {allTags.map((t) => (
+          {visibleTags.map((t) => (
             <button
               key={t}
               onClick={() => setTag(t)}
@@ -63,6 +68,14 @@ export default function CatalogClient({ wallpapers }: { wallpapers: Wallpaper[] 
               {t}
             </button>
           ))}
+          {allTags.length > COLLAPSED_TAG_COUNT && (
+            <button
+              onClick={() => setShowAllTags((v) => !v)}
+              className="text-xs uppercase tracking-widest px-3 py-1.5 border border-[#ddd5c4] text-[#7a7060] hover:border-[#7a7060] transition-colors"
+            >
+              {showAllTags ? "− Less" : `+ ${allTags.length - COLLAPSED_TAG_COUNT} more`}
+            </button>
+          )}
         </div>
       )}
 
