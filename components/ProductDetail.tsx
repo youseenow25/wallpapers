@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import MonitorDisplay from "./MonitorDisplay";
 import { useCart } from "./CartContext";
-import { createCheckoutSession, coverUrl } from "@/lib/api";
+import { createCheckoutSession, framedCoverUrl } from "@/lib/api";
 import type { Wallpaper } from "@/lib/types";
 
 export default function ProductDetail({ w }: { w: Wallpaper }) {
@@ -174,10 +173,14 @@ export default function ProductDetail({ w }: { w: Wallpaper }) {
             backgroundSize: "128px 128px",
           }}
         />
-        <div className="w-[78%] max-w-[520px] relative z-10">
-          <MonitorDisplay
-            src={coverUrl(w.id)}
+        <div className="w-[92%] max-w-[620px] relative z-10 select-none">
+          {/* Server-rendered monitor mockup — saving this image downloads the
+              watermarked wallpaper framed in the Mac display. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={framedCoverUrl(w.id)}
             alt={w.title}
+            className="w-full h-auto block"
           />
         </div>
       </div>

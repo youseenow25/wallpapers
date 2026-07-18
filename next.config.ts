@@ -3,6 +3,9 @@ import type { NextConfig } from "next";
 const BACKEND = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
 
 const nextConfig: NextConfig = {
+  turbopack: {
+    root: __dirname,
+  },
   images: {
     remotePatterns: [
       { hostname: "picsum.photos" },

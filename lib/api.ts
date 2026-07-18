@@ -8,6 +8,10 @@ export function coverUrl(id: number | string): string {
   return `${API}/api/covers/${id}`;
 }
 
+export function framedCoverUrl(id: number | string): string {
+  return `${API}/api/covers/${id}/framed`;
+}
+
 export async function getWallpapers(): Promise<Wallpaper[]> {
   const res = await fetch(`${API}/api/wallpapers`, { next: { revalidate: 60 } });
   if (!res.ok) throw new Error("Failed to fetch wallpapers");
