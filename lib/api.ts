@@ -19,14 +19,14 @@ export function packImageUrl(id: number | string, idx: number): string {
 }
 
 export async function getWallpapers(): Promise<Wallpaper[]> {
-  const res = await fetch(`${API}/api/wallpapers`, { next: { revalidate: 60 } });
+  const res = await fetch(`${API}/api/wallpapers`, { cache: "no-store" });
   if (!res.ok) throw new Error("Failed to fetch wallpapers");
   return res.json();
 }
 
 export async function getWallpaper(id: number | string): Promise<Wallpaper> {
   const res = await fetch(`${API}/api/wallpapers/${id}`, {
-    next: { revalidate: 60 },
+    cache: "no-store",
   });
   if (!res.ok) throw new Error("Wallpaper not found");
   return res.json();
