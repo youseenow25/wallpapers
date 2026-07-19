@@ -4,7 +4,7 @@ import { useState } from "react";
 import type { Wallpaper } from "@/lib/types";
 import ProductCard from "@/components/ProductCard";
 
-const COLLAPSED_TAG_COUNT = 12;
+const COLLAPSED_TAG_COUNT = 6;
 
 export default function CatalogClient({ wallpapers }: { wallpapers: Wallpaper[] }) {
   const [tag, setTag] = useState<string>("all");
