@@ -8,8 +8,14 @@ export function coverUrl(id: number | string): string {
   return `${API}/api/covers/${id}`;
 }
 
-export function framedCoverUrl(id: number | string): string {
-  return `${API}/api/covers/${id}/framed`;
+export function framedCoverUrl(id: number | string, imgIdx?: number): string {
+  return imgIdx === undefined
+    ? `${API}/api/covers/${id}/framed`
+    : `${API}/api/covers/${id}/framed?img=${imgIdx}`;
+}
+
+export function packImageUrl(id: number | string, idx: number): string {
+  return `${API}/api/covers/${id}/img/${idx}`;
 }
 
 export async function getWallpapers(): Promise<Wallpaper[]> {

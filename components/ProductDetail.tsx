@@ -3,14 +3,18 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useCart } from "./CartContext";
-import { createCheckoutSession, framedCoverUrl } from "@/lib/api";
-import type { Wallpaper } from "@/lib/types";
+import { createCheckoutSession, framedCoverUrl, packImageUrl } from "@/lib/api";
+import { packImageCount, type Wallpaper } from "@/lib/types";
 
 export default function ProductDetail({ w }: { w: Wallpaper }) {
   const [expanded, setExpanded] = useState(false);
   const [buying, setBuying] = useState(false);
   const [added, setAdded] = useState(false);
   const { addItem, openCart } = useCart();
+  const packCount = packImageCount(w);
+  const [selectedImg, setSelectedImg] = useState<number | undefined>(
+    packCount > 0 ? 0 : undefined,
+  );
 
   const tags = w.tags ? w.tags.split(",").filter(Boolean) : [];
   const descWords = w.description.split(" ");
@@ -99,6 +103,7 @@ export default function ProductDetail({ w }: { w: Wallpaper }) {
               <polyline points="20 6 9 17 4 12" />
             </svg>
             Tax included · Instant download
+            {packCount > 0 && <> · {packCount} wallpapers in this pack</>}
           </p>
         </div>
 
@@ -178,10 +183,31 @@ export default function ProductDetail({ w }: { w: Wallpaper }) {
               watermarked wallpaper framed in the Mac display. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={framedCoverUrl(w.id)}
+            src={framedCoverUrl(w.id, selectedImg)}
             alt={w.title}
             className="w-full h-auto block"
           />
+
+          {/* Pack gallery */}
+          {packCount > 0 && (
+            <div className="mt-6 flex flex-wrap justify-center gap-2">
+              {Array.from({ length: packCount }, (_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setSelectedImg(i)}
+                  className={`w-16 h-10 overflow-hidden border transition-opacity ${
+                    selectedImg === i
+                      ? "border-[#f0e8d8] opacity-100"
+                      : "border-transparent opacity-50 hover:opacity-80"
+                  }`}
+                  aria-label={`${w.title} — wallpaper ${i + 1}`}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={packImageUrl(w.id, i)} alt="" className="w-full h-full object-cover" />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
