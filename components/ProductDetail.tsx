@@ -5,8 +5,17 @@ import Link from "next/link";
 import { useCart } from "./CartContext";
 import { createCheckoutSession, framedCoverUrl, packImageUrl } from "@/lib/api";
 import { packImageCount, type Wallpaper } from "@/lib/types";
+import BundleUpsellCard from "./BundleUpsellCard";
 
-export default function ProductDetail({ w }: { w: Wallpaper }) {
+export default function ProductDetail({
+  w,
+  bundleCount,
+  bundleValue,
+}: {
+  w: Wallpaper;
+  bundleCount?: number;
+  bundleValue?: number;
+}) {
   const [expanded, setExpanded] = useState(false);
   const [buying, setBuying] = useState(false);
   const [added, setAdded] = useState(false);
@@ -139,6 +148,12 @@ export default function ProductDetail({ w }: { w: Wallpaper }) {
             {added ? "Added to cart ✓" : "Add to cart"}
           </button>
         </div>
+
+        {/* Get-everything upsell — shown here in the buy column (not as a
+            banner at the bottom of the page) so it's visible up front. */}
+        {bundleCount !== undefined && bundleValue !== undefined && bundleCount > 0 && (
+          <BundleUpsellCard wallpaperCount={bundleCount} totalValue={bundleValue} />
+        )}
 
         {/* Bundle nudge */}
         <div className="mt-5 max-w-[320px] border-l-2 border-[#c4b8a8] pl-3.5 py-1">
