@@ -30,7 +30,7 @@ export default function BundleUpsellCard({
     }
   }
 
-  const savings = Math.round(totalValue - 24.99);
+  const savings = Math.round(totalValue - 25.99);
 
   return (
     <div className="mt-6 max-w-[320px] bg-[#1c1a18] text-[#f0e8d8] p-4">
@@ -49,7 +49,7 @@ export default function BundleUpsellCard({
 
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-baseline gap-1.5">
-          <span className="font-serif text-2xl font-bold">$24.99</span>
+          <span className="font-serif text-2xl font-bold">$25.99</span>
           {savings > 0 && (
             <span className="text-[10px] text-[#a09880] line-through">
               ${totalValue.toFixed(2)}

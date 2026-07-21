@@ -25,7 +25,7 @@ export default function BundleBanner({
     }
   }
 
-  const savings = Math.round(totalValue - 24.99);
+  const savings = Math.round(totalValue - 25.99);
 
   return (
     <section className="bg-[#1c1a18] text-[#f0e8d8]">
@@ -37,7 +37,7 @@ export default function BundleBanner({
           </p>
           <h2 className="font-serif text-xl sm:text-2xl font-semibold leading-tight mb-1">
             Get every wallpaper.<br />
-            <span className="text-[#f0c060]">All {wallpaperCount} titles, $24.99.</span>
+            <span className="text-[#f0c060]">All {wallpaperCount} titles, $25.99.</span>
           </h2>
           <p className="text-xs text-[#c4b8a8]">
             One purchase — download anytime, keep forever.{savings > 0 && <> Save <span className="text-[#f0e8d8] font-medium">${savings}+</span> vs. buying individually.</>}
@@ -47,7 +47,7 @@ export default function BundleBanner({
         {/* CTA */}
         <div className="w-full sm:w-auto flex flex-col items-stretch sm:items-center gap-1.5 shrink-0">
           <div className="flex items-baseline justify-center gap-2 sm:block sm:text-center">
-            <span className="text-2xl font-serif font-bold">$24.99</span>
+            <span className="text-2xl font-serif font-bold">$25.99</span>
             {savings > 0 && (
               <p className="text-xs text-[#a09880] sm:mt-0.5">
                 <span className="line-through">${totalValue.toFixed(2)}</span> retail value
