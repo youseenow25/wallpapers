@@ -18,8 +18,10 @@ export function packImageUrl(id: number | string, idx: number): string {
   return `${API}/api/covers/${id}/img/${idx}`;
 }
 
-export async function getWallpapers(): Promise<Wallpaper[]> {
-  const res = await fetch(`${API}/api/wallpapers`, { cache: "no-store" });
+export async function getWallpapers(type?: string): Promise<Wallpaper[]> {
+  const url = new URL(`${API}/api/wallpapers`);
+  if (type) url.searchParams.append('type', type);
+  const res = await fetch(url.toString(), { cache: "no-store" });
   if (!res.ok) throw new Error("Failed to fetch wallpapers");
   return res.json();
 }

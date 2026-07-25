@@ -6,9 +6,14 @@ import ProductCard from "@/components/ProductCard";
 
 const COLLAPSED_TAG_COUNT = 6;
 
-export default function CatalogClient({ wallpapers }: { wallpapers: Wallpaper[] }) {
+export default function CatalogClient({ wallpapers: initialWallpapers }: { wallpapers: Wallpaper[] }) {
+  const [type, setType] = useState<string>("all");
   const [tag, setTag] = useState<string>("all");
   const [showAllTags, setShowAllTags] = useState(false);
+
+  const wallpapers = type === "all"
+    ? initialWallpapers
+    : initialWallpapers.filter(w => w.type === type);
 
   const allTags = Array.from(
     new Set(
@@ -41,6 +46,39 @@ export default function CatalogClient({ wallpapers }: { wallpapers: Wallpaper[] 
       <div className="mb-12">
         <h1 className="font-serif text-4xl font-bold mb-2">Collection</h1>
         <p className="text-sm text-[#7a7060]">{wallpapers.length} wallpapers</p>
+      </div>
+
+      <div className="flex flex-wrap gap-2 mb-10">
+        <button
+          onClick={() => { setType("all"); setTag("all"); }}
+          className={`text-xs uppercase tracking-widest px-3 py-1.5 border transition-colors font-semibold ${
+            type === "all"
+              ? "bg-[#1c1a18] text-[#f0e8d8] border-[#1c1a18]"
+              : "border-[#ddd5c4] text-[#7a7060] hover:border-[#7a7060]"
+          }`}
+        >
+          All Wallpapers
+        </button>
+        <button
+          onClick={() => { setType("desktop"); setTag("all"); }}
+          className={`text-xs uppercase tracking-widest px-3 py-1.5 border transition-colors font-semibold ${
+            type === "desktop"
+              ? "bg-[#1c1a18] text-[#f0e8d8] border-[#1c1a18]"
+              : "border-[#ddd5c4] text-[#7a7060] hover:border-[#7a7060]"
+          }`}
+        >
+          Desktop
+        </button>
+        <button
+          onClick={() => { setType("mobile"); setTag("all"); }}
+          className={`text-xs uppercase tracking-widest px-3 py-1.5 border transition-colors font-semibold ${
+            type === "mobile"
+              ? "bg-[#1c1a18] text-[#f0e8d8] border-[#1c1a18]"
+              : "border-[#ddd5c4] text-[#7a7060] hover:border-[#7a7060]"
+          }`}
+        >
+          Mobile
+        </button>
       </div>
 
       {allTags.length > 0 && (
