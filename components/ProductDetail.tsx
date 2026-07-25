@@ -193,7 +193,7 @@ export default function ProductDetail({
             backgroundSize: "128px 128px",
           }}
         />
-        <div className="w-[92%] max-w-[620px] relative z-10 select-none">
+        <div className={`relative z-10 select-none ${w.type === 'mobile' ? 'w-[280px]' : 'w-[92%] max-w-[620px]'}`}>
           {/* Server-rendered mockup — monitor for desktop, phone for mobile.
               Saving this image downloads the watermarked wallpaper framed in the device. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
