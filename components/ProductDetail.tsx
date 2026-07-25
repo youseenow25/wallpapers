@@ -194,14 +194,58 @@ export default function ProductDetail({
           }}
         />
         <div className={`relative z-10 select-none ${w.type === 'mobile' ? 'w-[280px]' : 'w-[92%] max-w-[620px]'}`}>
-          {/* Server-rendered mockup — monitor for desktop, phone for mobile.
-              Saving this image downloads the watermarked wallpaper framed in the device. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={w.type === 'mobile' ? framedMobileCoverUrl(w.id, selectedImg) : framedCoverUrl(w.id, selectedImg)}
-            alt={w.title}
-            className="w-full h-auto block"
-          />
+          {w.type === 'mobile' ? (
+            /* iPhone frame for mobile wallpapers */
+            <div className="relative mx-auto" style={{ width: '100%', paddingBottom: '200%' }}>
+              <svg
+                viewBox="0 0 280 560"
+                className="absolute inset-0 w-full h-full"
+                style={{ pointerEvents: 'none' }}
+              >
+                {/* iPhone body */}
+                <defs>
+                  <linearGradient id="iPhoneGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stopColor="#2a2a2a" />
+                    <stop offset="1" stopColor="#1a1a1a" />
+                  </linearGradient>
+                </defs>
+                <rect width="280" height="560" rx="40" fill="url(#iPhoneGradient)" />
+                {/* Screen area */}
+                <rect x="10" y="45" width="260" height="470" rx="35" fill="#000" />
+                {/* Notch */}
+                <rect x="110" y="0" width="60" height="28" rx="0" fill="#000" />
+              </svg>
+              {/* Wallpaper image positioned inside screen area */}
+              <div
+                className="absolute"
+                style={{
+                  left: '3.6%',
+                  top: '8%',
+                  width: '92.8%',
+                  aspectRatio: '9/16',
+                  overflow: 'hidden',
+                  borderRadius: '30px',
+                }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={framedCoverUrl(w.id, selectedImg)}
+                  alt={w.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          ) : (
+            /* Monitor frame for desktop wallpapers */
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={framedCoverUrl(w.id, selectedImg)}
+                alt={w.title}
+                className="w-full h-auto block"
+              />
+            </>
+          )}
 
           {/* Pack gallery */}
           {packCount > 0 && (
