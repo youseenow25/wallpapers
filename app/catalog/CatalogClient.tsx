@@ -7,7 +7,7 @@ import ProductCard from "@/components/ProductCard";
 const COLLAPSED_TAG_COUNT = 6;
 
 export default function CatalogClient({ wallpapers: initialWallpapers }: { wallpapers: Wallpaper[] }) {
-  const [type, setType] = useState<string>("all");
+  const [type, setType] = useState<string>("desktop");
   const [tag, setTag] = useState<string>("all");
   const [showAllTags, setShowAllTags] = useState(false);
 
