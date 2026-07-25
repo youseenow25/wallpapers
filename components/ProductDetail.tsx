@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useCart } from "./CartContext";
-import { createCheckoutSession, framedCoverUrl, framedMobileCoverUrl, packImageUrl } from "@/lib/api";
+import { createCheckoutSession, coverUrl, framedCoverUrl, framedMobileCoverUrl, packImageUrl } from "@/lib/api";
 import { packImageCount, type Wallpaper } from "@/lib/types";
 import BundleUpsellCard from "./BundleUpsellCard";
 
@@ -216,7 +216,7 @@ export default function ProductDetail({
                   {/* Wallpaper */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={framedCoverUrl(w.id, selectedImg)}
+                    src={coverUrl(w.id)}
                     alt={w.title}
                     className="w-full h-full object-cover"
                   />
