@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useCart } from "./CartContext";
-import { createCheckoutSession, framedCoverUrl, packImageUrl } from "@/lib/api";
+import { createCheckoutSession, framedCoverUrl, framedMobileCoverUrl, packImageUrl } from "@/lib/api";
 import { packImageCount, type Wallpaper } from "@/lib/types";
 import BundleUpsellCard from "./BundleUpsellCard";
 
@@ -194,11 +194,11 @@ export default function ProductDetail({
           }}
         />
         <div className="w-[92%] max-w-[620px] relative z-10 select-none">
-          {/* Server-rendered monitor mockup — saving this image downloads the
-              watermarked wallpaper framed in the Mac display. */}
+          {/* Server-rendered mockup — monitor for desktop, phone for mobile.
+              Saving this image downloads the watermarked wallpaper framed in the device. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={framedCoverUrl(w.id, selectedImg)}
+            src={w.type === 'mobile' ? framedMobileCoverUrl(w.id, selectedImg) : framedCoverUrl(w.id, selectedImg)}
             alt={w.title}
             className="w-full h-auto block"
           />

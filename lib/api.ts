@@ -14,6 +14,12 @@ export function framedCoverUrl(id: number | string, imgIdx?: number): string {
     : `${API}/api/covers/${id}/framed?img=${imgIdx}`;
 }
 
+export function framedMobileCoverUrl(id: number | string, imgIdx?: number): string {
+  return imgIdx === undefined
+    ? `${API}/api/covers/${id}/framed-mobile`
+    : `${API}/api/covers/${id}/framed-mobile?img=${imgIdx}`;
+}
+
 export function packImageUrl(id: number | string, idx: number): string {
   return `${API}/api/covers/${id}/img/${idx}`;
 }
