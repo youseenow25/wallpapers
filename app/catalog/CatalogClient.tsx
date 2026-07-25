@@ -1,15 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import type { Wallpaper } from "@/lib/types";
 import ProductCard from "@/components/ProductCard";
 
 const COLLAPSED_TAG_COUNT = 6;
 
 export default function CatalogClient({ wallpapers: initialWallpapers }: { wallpapers: Wallpaper[] }) {
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const [type, setType] = useState<string>("desktop");
   const [tag, setTag] = useState<string>("all");
   const [showAllTags, setShowAllTags] = useState(false);
+
+  useEffect(() => {
+    const typeParam = searchParams.get("type");
+    if (typeParam && ["all", "desktop", "mobile"].includes(typeParam)) {
+      setType(typeParam);
+    }
+  }, [searchParams]);
 
   const wallpapers = type === "all"
     ? initialWallpapers
@@ -50,7 +60,7 @@ export default function CatalogClient({ wallpapers: initialWallpapers }: { wallp
 
       <div className="flex flex-wrap gap-2 mb-10">
         <button
-          onClick={() => { setType("all"); setTag("all"); }}
+          onClick={() => { setType("all"); setTag("all"); router.push("?type=all"); }}
           className={`text-xs uppercase tracking-widest px-3 py-1.5 border transition-colors font-semibold ${
             type === "all"
               ? "bg-[#1c1a18] text-[#f0e8d8] border-[#1c1a18]"
@@ -60,7 +70,7 @@ export default function CatalogClient({ wallpapers: initialWallpapers }: { wallp
           All Wallpapers
         </button>
         <button
-          onClick={() => { setType("desktop"); setTag("all"); }}
+          onClick={() => { setType("desktop"); setTag("all"); router.push("?type=desktop"); }}
           className={`text-xs uppercase tracking-widest px-3 py-1.5 border transition-colors font-semibold ${
             type === "desktop"
               ? "bg-[#1c1a18] text-[#f0e8d8] border-[#1c1a18]"
@@ -70,7 +80,7 @@ export default function CatalogClient({ wallpapers: initialWallpapers }: { wallp
           Desktop
         </button>
         <button
-          onClick={() => { setType("mobile"); setTag("all"); }}
+          onClick={() => { setType("mobile"); setTag("all"); router.push("?type=mobile"); }}
           className={`text-xs uppercase tracking-widest px-3 py-1.5 border transition-colors font-semibold ${
             type === "mobile"
               ? "bg-[#1c1a18] text-[#f0e8d8] border-[#1c1a18]"
