@@ -193,46 +193,39 @@ export default function ProductDetail({
             backgroundSize: "128px 128px",
           }}
         />
-        <div className={`relative z-10 select-none ${w.type === 'mobile' ? 'w-[280px]' : 'w-[92%] max-w-[620px]'}`}>
+        <div className={`relative z-10 select-none ${w.type === 'mobile' ? 'w-[280px] sm:w-[320px] mx-auto' : 'w-[92%] max-w-[620px]'}`}>
           {w.type === 'mobile' ? (
-            /* iPhone frame for mobile wallpapers */
-            <div className="relative mx-auto" style={{ width: '100%', paddingBottom: '200%' }}>
-              <svg
-                viewBox="0 0 280 560"
-                className="absolute inset-0 w-full h-full"
-                style={{ pointerEvents: 'none' }}
-              >
-                {/* iPhone body */}
-                <defs>
-                  <linearGradient id="iPhoneGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0" stopColor="#2a2a2a" />
-                    <stop offset="1" stopColor="#1a1a1a" />
-                  </linearGradient>
-                </defs>
-                <rect width="280" height="560" rx="40" fill="url(#iPhoneGradient)" />
-                {/* Screen area */}
-                <rect x="10" y="45" width="260" height="470" rx="35" fill="#000" />
+            /* iPhone mockup */
+            <div>
+              <div className="relative bg-[#1a1a1a] rounded-[3rem] p-3 shadow-[0_16px_128px_rgba(0,0,0,0.15),0_1px_1px_rgba(0,0,0,0.1)]">
                 {/* Notch */}
-                <rect x="110" y="0" width="60" height="28" rx="0" fill="#000" />
-              </svg>
-              {/* Wallpaper image positioned inside screen area */}
-              <div
-                className="absolute"
-                style={{
-                  left: '3.6%',
-                  top: '8%',
-                  width: '92.8%',
-                  aspectRatio: '9/16',
-                  overflow: 'hidden',
-                  borderRadius: '30px',
-                }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={framedCoverUrl(w.id, selectedImg)}
-                  alt={w.title}
-                  className="w-full h-full object-cover"
-                />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[100px] h-[28px] bg-[#1a1a1a] rounded-b-2xl z-10"></div>
+
+                {/* Screen */}
+                <div className="bg-white rounded-[2.5rem] overflow-hidden relative" style={{ height: '620px' }}>
+                  {/* Status Bar */}
+                  <div className="absolute top-0 left-0 right-0 h-11 flex items-end justify-between px-6 pb-1 z-20">
+                    <span className="text-[9px] font-semibold text-[#1a1a1a]">9:41</span>
+                    <div className="flex gap-1 items-center">
+                      <div className="w-3 h-1.5 border border-[#1a1a1a] rounded-sm relative">
+                        <div className="absolute inset-[1px] bg-[#1a1a1a] rounded-[1px]" style={{ width: '70%' }}></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Wallpaper */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={framedCoverUrl(w.id, selectedImg)}
+                    alt={w.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+
+              {/* Home Indicator */}
+              <div className="flex justify-center mt-1.5">
+                <div className="w-24 h-1 bg-white/30 rounded-full"></div>
               </div>
             </div>
           ) : (
