@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { getWallpapers } from "@/lib/api";
 import CatalogClient from "./CatalogClient";
 import BundleBanner from "@/components/BundleBanner";
@@ -10,7 +11,9 @@ export default async function CatalogPage() {
       {wallpapers.length > 0 && (
         <BundleBanner wallpaperCount={wallpapers.length} totalValue={totalRetailValue} />
       )}
-      <CatalogClient wallpapers={wallpapers} />
+      <Suspense>
+        <CatalogClient wallpapers={wallpapers} />
+      </Suspense>
     </>
   );
 }
