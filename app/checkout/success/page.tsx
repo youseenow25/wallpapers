@@ -12,6 +12,7 @@ interface OrderDetails {
   total: number;
   discountPercent: number;
   downloads: { title: string; url: string }[];
+  downloadAllUrl: string | null;
 }
 
 const Spinner = () => (
@@ -122,6 +123,18 @@ function SuccessContent() {
               Your downloads are ready below.
             </p>
           </div>
+
+          {/* Download all */}
+          {order.downloadAllUrl && order.downloads.length > 1 && (
+            <div className="text-center mb-6">
+              <a
+                href={order.downloadAllUrl}
+                className="inline-block bg-[#1c1a18] text-[#f0e8d8] px-10 py-4 text-[11px] tracking-[0.2em] uppercase font-medium hover:bg-black transition-colors"
+              >
+                Download All ({order.downloads.length})
+              </a>
+            </div>
+          )}
 
           {/* Downloads */}
           {order.downloads.length > 0 && (

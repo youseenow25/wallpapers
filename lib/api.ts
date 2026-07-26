@@ -79,6 +79,7 @@ export async function verifyCheckoutSession(
   total: number;
   discountPercent: number;
   downloads: { title: string; url: string }[];
+  downloadAllUrl: string | null;
 }> {
   const res = await fetch(`${API}/api/checkout/verify/${sessionId}`);
   if (!res.ok) throw new Error("Payment verification failed");
