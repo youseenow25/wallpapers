@@ -156,6 +156,20 @@ function SuccessContent() {
             </div>
           )}
 
+          {/* Delivery notice */}
+          {order.downloads.length > 0 && (
+            <div className="flex items-start gap-3 border border-[#ddd5c4] bg-[#e4d9c4]/50 rounded-sm px-5 py-4 mb-6 text-sm">
+              <svg className="flex-shrink-0 mt-0.5" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7a7060" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+              <p className="text-[#7a7060] leading-relaxed">
+                Your files are being prepared — downloads can take a few minutes to become
+                available. If a link isn&apos;t ready yet, wait a moment and try again.
+              </p>
+            </div>
+          )}
+
           {/* Order summary */}
           <div className="border border-[#ddd5c4] bg-white/30 rounded-sm divide-y divide-[#ddd5c4] mb-10 text-sm">
             <div className="flex justify-between px-6 py-3.5">
