@@ -164,8 +164,7 @@ function SuccessContent() {
                 <polyline points="12 6 12 12 16 14" />
               </svg>
               <p className="text-[#7a7060] leading-relaxed">
-                Your files are being prepared — downloads can take a few minutes to become
-                available. If a link isn&apos;t ready yet, wait a moment and try again.
+                Downloads can take a few minutes to become available.
               </p>
             </div>
           )}
