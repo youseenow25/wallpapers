@@ -112,7 +112,7 @@ body {
   width: max-content;
   gap: 20px;
   padding: 0 10px;
-  animation: marquee-scroll 35s linear infinite;
+  animation: marquee-scroll 70s linear infinite;
   will-change: transform;
 }
 .marquee-outer:hover .marquee-track { animation-play-state: paused; }
