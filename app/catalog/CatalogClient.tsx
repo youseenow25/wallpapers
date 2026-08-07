@@ -16,7 +16,7 @@ export default function CatalogClient({ wallpapers: initialWallpapers }: { wallp
 
   useEffect(() => {
     const typeParam = searchParams.get("type");
-    if (typeParam && ["all", "desktop", "mobile"].includes(typeParam)) {
+    if (typeParam && ["all", "desktop"].includes(typeParam)) {
       setType(typeParam);
     }
   }, [searchParams]);
@@ -78,16 +78,6 @@ export default function CatalogClient({ wallpapers: initialWallpapers }: { wallp
           }`}
         >
           Desktop
-        </button>
-        <button
-          onClick={() => { setType("mobile"); setTag("all"); router.push("?type=mobile"); }}
-          className={`text-xs uppercase tracking-widest px-3 py-1.5 border transition-colors font-semibold ${
-            type === "mobile"
-              ? "bg-[#1c1a18] text-[#f0e8d8] border-[#1c1a18]"
-              : "border-[#ddd5c4] text-[#7a7060] hover:border-[#7a7060]"
-          }`}
-        >
-          Mobile
         </button>
       </div>
 
