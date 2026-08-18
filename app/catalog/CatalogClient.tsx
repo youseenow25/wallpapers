@@ -35,15 +35,24 @@ export default function CatalogClient({ wallpapers: initialWallpapers }: { wallp
 
   const visibleTags = showAllTags ? allTags : allTags.slice(0, COLLAPSED_TAG_COUNT);
 
-  const BOTTOM_IDS = new Set([27, 28, 29, 30, 31]);
+  const F1_PACK_ID = 196;
 
-  const sortToBottom = (list: Wallpaper[]) => {
-    const top = list.filter((w) => !BOTTOM_IDS.has(w.id));
-    const bottom = list.filter((w) => BOTTOM_IDS.has(w.id));
-    return [...top, ...bottom];
+  const sortByNewest = (list: Wallpaper[]) => {
+    const f1Pack = list.find((w) => w.id === F1_PACK_ID);
+    const others = list.filter((w) => w.id !== F1_PACK_ID);
+
+    // Sort others by created_at descending (newest first)
+    others.sort((a, b) => {
+      const dateA = new Date(a.created_at || 0).getTime();
+      const dateB = new Date(b.created_at || 0).getTime();
+      return dateB - dateA;
+    });
+
+    // Put F1 pack first if it exists, then others
+    return f1Pack ? [f1Pack, ...others] : others;
   };
 
-  const filtered = sortToBottom(
+  const filtered = sortByNewest(
     tag === "all"
       ? wallpapers
       : wallpapers.filter((w) =>
