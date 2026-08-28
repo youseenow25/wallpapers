@@ -59,6 +59,26 @@ export default function GoogleSignInButton({ next }: { next: string }) {
     if (!CLIENT_ID) return;
     let cancelled = false;
 
+    let observer: ResizeObserver | undefined;
+
+    // Google's button only accepts a fixed pixel width (200–400), so render it
+    // to match the container and re-render when the container width changes.
+    function renderAtContainerWidth() {
+      const el = containerRef.current;
+      if (!window.google || !el) return;
+      const width = Math.max(200, Math.min(400, Math.floor(el.offsetWidth)));
+      el.innerHTML = "";
+      window.google.accounts.id.renderButton(el, {
+        type: "standard",
+        theme: "outline",
+        size: "large",
+        width,
+        text: "continue_with",
+        shape: "rectangular",
+        logo_alignment: "center",
+      });
+    }
+
     loadGsi()
       .then(() => {
         if (cancelled || !window.google || !containerRef.current) return;
@@ -75,16 +95,16 @@ export default function GoogleSignInButton({ next }: { next: string }) {
             }
           },
         });
-        window.google.accounts.id.renderButton(containerRef.current, {
-          type: "standard",
-          theme: "outline",
-          size: "large",
-          width: 320,
-          text: "continue_with",
-          shape: "rectangular",
-          logo_alignment: "center",
-        });
+        renderAtContainerWidth();
         setReady(true);
+
+        // Keep the button matched to the form width on resize.
+        let last = containerRef.current.offsetWidth;
+        observer = new ResizeObserver(() => {
+          const w = containerRef.current?.offsetWidth ?? 0;
+          if (Math.abs(w - last) > 1) { last = w; renderAtContainerWidth(); }
+        });
+        observer.observe(containerRef.current);
 
         // If Google can't render (e.g. origin not authorized), the container
         // stays empty — surface a hint instead of showing a blank gap.
@@ -98,7 +118,7 @@ export default function GoogleSignInButton({ next }: { next: string }) {
         if (!cancelled) setError("Couldn't reach Google. Check your connection and try again.");
       });
 
-    return () => { cancelled = true; };
+    return () => { cancelled = true; observer?.disconnect(); };
   }, [next, loginWithGoogle, router]);
 
   if (!CLIENT_ID) {
@@ -110,9 +130,9 @@ export default function GoogleSignInButton({ next }: { next: string }) {
   }
 
   return (
-    <div className="flex flex-col items-center gap-2">
-      <div ref={containerRef} className="flex justify-center" style={{ minHeight: ready ? 40 : 0 }} />
-      {error && <p className="text-xs text-[#a06a5a] text-center max-w-[300px]">{error}</p>}
+    <div className="flex flex-col items-stretch gap-2">
+      <div ref={containerRef} className="w-full overflow-hidden [&>div]:!w-full [color-scheme:light]" style={{ minHeight: ready ? 40 : 0 }} />
+      {error && <p className="text-xs text-[#a06a5a] text-center">{error}</p>}
     </div>
   );
 }
