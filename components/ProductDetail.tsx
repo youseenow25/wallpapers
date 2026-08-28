@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { coverUrl, framedCoverUrl, packImageUrl, getMemberDownloads, getToken, PRICING } from "@/lib/api";
+import { useRouter } from "next/navigation";
+import { coverUrl, framedCoverUrl, packImageUrl, getMemberDownloads, getToken, startMembershipCheckout, PRICING, type Plan } from "@/lib/api";
 import { packImageCount, type Wallpaper } from "@/lib/types";
 import { useAuth } from "./AuthContext";
 
@@ -15,7 +16,10 @@ export default function ProductDetail({
 }) {
   const [expanded, setExpanded] = useState(false);
   const { user, hasAccess, loading } = useAuth();
+  const router = useRouter();
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
+  const [loadingPlan, setLoadingPlan] = useState<Plan | null>(null);
+  const [checkoutError, setCheckoutError] = useState("");
   const packCount = packImageCount(w);
   const [selectedImg, setSelectedImg] = useState<number | undefined>(
     packCount > 0 ? 0 : undefined,
@@ -41,6 +45,27 @@ export default function ProductDetail({
       .catch(() => {});
     return () => { active = false; };
   }, [hasAccess, w.id]);
+
+  async function choosePlan(plan: Plan) {
+    setCheckoutError("");
+    if (!user) {
+      router.push(`/signup?next=${encodeURIComponent("/pricing")}`);
+      return;
+    }
+    const token = getToken();
+    if (!token) {
+      router.push("/login?next=/pricing");
+      return;
+    }
+    setLoadingPlan(plan);
+    try {
+      const { url } = await startMembershipCheckout(plan, token);
+      window.location.assign(url);
+    } catch (err) {
+      setCheckoutError(err instanceof Error ? err.message : "Checkout failed");
+      setLoadingPlan(null);
+    }
+  }
 
   return (
     <div className="flex flex-col lg:flex-row min-h-[calc(100vh-56px)]">
@@ -97,29 +122,27 @@ export default function ProductDetail({
         {/* Access status */}
         <div className="mb-8 pb-8 border-b border-[#ddd5c4]">
           <p className="text-[11px] uppercase tracking-[0.2em] text-[#a09880] mb-1.5">
-            Included with membership
+            Membership
           </p>
-          <div className="flex items-baseline gap-2.5">
-            <span className="font-serif text-[2.6rem] font-semibold leading-none tracking-tight">
-              ${PRICING.monthly.amount}
-            </span>
-            <span className="text-xs text-[#a09880] mb-0.5">/mo · or ${PRICING.lifetime.amount} lifetime</span>
-          </div>
-          <p className="text-[11px] text-[#a09880] mt-1.5 flex items-center gap-1">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <h2 className="font-serif text-2xl font-semibold leading-tight text-[#1c1a18]">
+            One membership unlocks{" "}
+            <span className="underline decoration-[#c4b8a8] decoration-2 underline-offset-4">every wallpaper</span>.
+          </h2>
+          <p className="text-[12px] text-[#7a7060] mt-2 flex items-center gap-1.5">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <polyline points="20 6 9 17 4 12" />
             </svg>
-            ${PRICING.monthly.amount}/mo unlocks all wallpapers · Instant download
-            {packCount > 0 && <> · {packCount} wallpapers in this pack</>}
+            Full access to the entire collection · Instant download
+            {packCount > 0 && <> · {packCount} in this pack</>}
           </p>
         </div>
 
         {/* Access CTA */}
-        <div className="space-y-2.5 max-w-[320px]">
+        <div className="max-w-[340px]">
           {loading ? (
             <div className="w-full py-4 bg-[#e6dbc8] animate-pulse" />
           ) : hasAccess ? (
-            <>
+            <div className="space-y-2.5">
               <a
                 href={downloadUrl ?? undefined}
                 aria-disabled={!downloadUrl}
@@ -138,33 +161,58 @@ export default function ProductDetail({
               >
                 Download entire collection
               </Link>
-            </>
+            </div>
           ) : (
-            <>
-              <Link
-                href="/pricing"
-                className="block text-center w-full bg-[#1c1a18] hover:bg-[#0e0d0c] text-[#f0e8d8] py-4 text-[11px] tracking-[0.18em] uppercase font-medium transition-colors"
+            <div className="space-y-3">
+              {/* Lifetime — highlighted */}
+              <button
+                onClick={() => choosePlan("lifetime")}
+                disabled={loadingPlan !== null}
+                className="relative w-full text-left border-2 border-[#1c1a18] bg-[#1c1a18] text-[#f0e8d8] p-4 transition-colors hover:bg-[#0e0d0c] disabled:opacity-60"
               >
-                Get access
-              </Link>
-              {!user && (
-                <Link
-                  href="/login"
-                  className="block text-center w-full border border-[#1c1a18] text-[#1c1a18] hover:bg-[#1c1a18] hover:text-[#f0e8d8] py-4 text-[11px] tracking-[0.18em] uppercase font-medium transition-all duration-200"
-                >
-                  Sign in
-                </Link>
-              )}
-            </>
-          )}
-        </div>
+                <span className="absolute -top-2.5 right-3 bg-[#f0c060] text-[#1c1a18] text-[9px] font-bold uppercase tracking-widest px-2 py-0.5">
+                  Best value
+                </span>
+                <div className="flex items-baseline justify-between">
+                  <span className="text-[11px] uppercase tracking-[0.18em] font-medium">Lifetime access</span>
+                  <span className="font-serif text-2xl font-bold">${PRICING.lifetime.amount}</span>
+                </div>
+                <div className="flex items-center justify-between mt-1">
+                  <span className="text-[11px] text-[#c4b8a8]">Pay once · all wallpapers forever</span>
+                  <span className="text-[10px] uppercase tracking-widest text-[#f0c060]">
+                    {loadingPlan === "lifetime" ? "Redirecting…" : "One-time"}
+                  </span>
+                </div>
+              </button>
 
-        {/* Membership nudge */}
-        <div className="mt-5 max-w-[320px] border-l-2 border-[#c4b8a8] pl-3.5 py-1">
-          <p className="text-[11px] text-[#7a7060] leading-relaxed">
-            <span className="font-semibold text-[#1c1a18]">One membership, everything:</span>{" "}
-            every wallpaper on Outbbo, plus new drops — from ${PRICING.monthly.amount}/mo.
-          </p>
+              {/* Monthly */}
+              <button
+                onClick={() => choosePlan("monthly")}
+                disabled={loadingPlan !== null}
+                className="w-full text-left border border-[#1c1a18] text-[#1c1a18] p-4 transition-colors hover:bg-[#1c1a18] hover:text-[#f0e8d8] disabled:opacity-60 group"
+              >
+                <div className="flex items-baseline justify-between">
+                  <span className="text-[11px] uppercase tracking-[0.18em] font-medium">Monthly access</span>
+                  <span className="font-serif text-2xl font-bold">${PRICING.monthly.amount}<span className="text-sm font-normal">/mo</span></span>
+                </div>
+                <div className="flex items-center justify-between mt-1">
+                  <span className="text-[11px] text-[#7a7060] group-hover:text-[#c4b8a8]">All wallpapers · cancel anytime</span>
+                  <span className="text-[10px] uppercase tracking-widest text-[#a09880] group-hover:text-[#f0e8d8]">
+                    {loadingPlan === "monthly" ? "Redirecting…" : "Subscribe"}
+                  </span>
+                </div>
+              </button>
+
+              {checkoutError && <p className="text-xs text-red-600">{checkoutError}</p>}
+
+              {!user && (
+                <p className="text-[11px] text-[#a09880] text-center pt-1">
+                  Already a member?{" "}
+                  <Link href="/login" className="text-[#1c1a18] underline underline-offset-2">Sign in</Link>
+                </p>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Trust */}
