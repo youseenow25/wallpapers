@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useCart } from "./CartContext";
+import { useAuth } from "./AuthContext";
 
 export default function Nav() {
-  const { count, openCart } = useCart();
+  const { user, hasAccess } = useAuth();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-30 bg-[#f0e8d8] border-b border-[#ddd5c4]">
@@ -20,6 +20,7 @@ export default function Nav() {
           <div className="hidden lg:flex items-center gap-6">
             <Link href="/" className="nav-link">Home</Link>
             <Link href="/catalog" className="nav-link">Catalog</Link>
+            <Link href="/pricing" className="nav-link">Pricing</Link>
             <Link href="/contact" className="nav-link">Contact</Link>
           </div>
         </div>
@@ -34,24 +35,32 @@ export default function Nav() {
         </Link>
 
         <div className="flex items-center gap-4">
-          <button className="hidden sm:block p-1 hover:opacity-60 transition-opacity" aria-label="Search">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
-          </button>
-          <button
-            onClick={openCart}
-            className="flex items-center gap-1.5 text-xs tracking-widest uppercase hover:opacity-60 transition-opacity"
-            aria-label="Open cart"
-          >
-            Cart
-            {count > 0 && (
-              <span className="w-4 h-4 bg-[#1c1a18] text-[#f0e8d8] rounded-full text-[10px] flex items-center justify-center">
-                {count}
-              </span>
-            )}
-          </button>
+          {user ? (
+            <Link
+              href="/account"
+              className="flex items-center gap-1.5 text-xs tracking-widest uppercase hover:opacity-60 transition-opacity"
+            >
+              Account
+              {hasAccess && (
+                <span className="w-1.5 h-1.5 bg-[#1c9d5b] rounded-full" aria-label="Active membership" />
+              )}
+            </Link>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="hidden sm:block text-xs tracking-widest uppercase hover:opacity-60 transition-opacity"
+              >
+                Sign in
+              </Link>
+              <Link
+                href="/pricing"
+                className="bg-[#1c1a18] text-[#f0e8d8] px-4 py-2 text-[11px] tracking-widest uppercase hover:bg-black transition-colors"
+              >
+                Join
+              </Link>
+            </>
+          )}
         </div>
       </nav>
     </header>

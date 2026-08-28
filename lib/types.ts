@@ -21,7 +21,18 @@ export function packImageCount(w: Wallpaper): number {
   }
 }
 
-export interface CartItem {
-  wallpaper: Wallpaper;
-  quantity: number;
+export type Plan = "none" | "monthly" | "lifetime";
+
+export interface User {
+  id: number;
+  email: string;
+  plan: Plan;
+  hasAccess: boolean;
+  subscriptionStatus: string | null;
+  currentPeriodEnd: string | null;
+}
+
+export interface MemberDownloads {
+  downloadAllUrl: string;
+  items: { id: number; title: string; url: string }[];
 }

@@ -21,7 +21,7 @@ export default function ProductCard({ w }: { w: Wallpaper }) {
       </div>
       <div className="space-y-0.5">
         <h3 className="text-sm font-medium leading-snug">{w.title}</h3>
-        <p className="text-sm text-[#7a7060]">${Number(w.price).toFixed(2)}</p>
+        <p className="text-xs uppercase tracking-widest text-[#a09880]">Included with membership</p>
       </div>
     </Link>
   );

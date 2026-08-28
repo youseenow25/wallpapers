@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import { Playfair_Display, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
-import { CartProvider } from "@/components/CartContext";
+import { AuthProvider } from "@/components/AuthContext";
 import Nav from "@/components/Nav";
-import CartDrawer from "@/components/CartDrawer";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -42,11 +41,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${playfair.variable} ${dmSans.variable}`}>
       <body>
-        <CartProvider>
+        <AuthProvider>
           <Nav />
           <main className="pt-14">{children}</main>
-          <CartDrawer />
-        </CartProvider>
+        </AuthProvider>
         <Analytics />
       </body>
     </html>

@@ -17,6 +17,7 @@ export default function CatalogClient({ wallpapers: initialWallpapers }: { wallp
   useEffect(() => {
     const typeParam = searchParams.get("type");
     if (typeParam && ["all", "desktop"].includes(typeParam)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setType(typeParam);
     }
   }, [searchParams]);

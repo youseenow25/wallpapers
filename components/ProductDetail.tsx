@@ -1,25 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useCart } from "./CartContext";
-import { createCheckoutSession, coverUrl, framedCoverUrl, framedMobileCoverUrl, packImageUrl } from "@/lib/api";
+import { coverUrl, framedCoverUrl, packImageUrl, getMemberDownloads, getToken, PRICING } from "@/lib/api";
 import { packImageCount, type Wallpaper } from "@/lib/types";
-import BundleUpsellCard from "./BundleUpsellCard";
+import { useAuth } from "./AuthContext";
 
 export default function ProductDetail({
   w,
-  bundleCount,
-  bundleValue,
 }: {
   w: Wallpaper;
   bundleCount?: number;
   bundleValue?: number;
 }) {
   const [expanded, setExpanded] = useState(false);
-  const [buying, setBuying] = useState(false);
-  const [added, setAdded] = useState(false);
-  const { addItem, openCart } = useCart();
+  const { user, hasAccess, loading } = useAuth();
+  const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const packCount = packImageCount(w);
   const [selectedImg, setSelectedImg] = useState<number | undefined>(
     packCount > 0 ? 0 : undefined,
@@ -30,22 +26,21 @@ export default function ProductDetail({
   const isLong = descWords.length > 20;
   const shortDesc = isLong ? descWords.slice(0, 20).join(" ") + "…" : w.description;
 
-  function handleAddToCart() {
-    addItem(w, 1);
-    setAdded(true);
-    setTimeout(() => setAdded(false), 1800);
-    openCart();
-  }
-
-  async function handleBuyNow() {
-    setBuying(true);
-    try {
-      const { url } = await createCheckoutSession([{ id: w.id, quantity: 1 }]);
-      window.location.href = url;
-    } catch {
-      setBuying(false);
-    }
-  }
+  // Members get a signed download link for this wallpaper.
+  useEffect(() => {
+    if (!hasAccess) return;
+    const token = getToken();
+    if (!token) return;
+    let active = true;
+    getMemberDownloads(token)
+      .then((d) => {
+        if (!active) return;
+        const item = d.items.find((i) => i.id === w.id);
+        setDownloadUrl(item?.url ?? null);
+      })
+      .catch(() => {});
+    return () => { active = false; };
+  }, [hasAccess, w.id]);
 
   return (
     <div className="flex flex-col lg:flex-row min-h-[calc(100vh-56px)]">
@@ -99,67 +94,76 @@ export default function ProductDetail({
           )}
         </div>
 
-        {/* Price */}
+        {/* Access status */}
         <div className="mb-8 pb-8 border-b border-[#ddd5c4]">
+          <p className="text-[11px] uppercase tracking-[0.2em] text-[#a09880] mb-1.5">
+            Included with membership
+          </p>
           <div className="flex items-baseline gap-2.5">
             <span className="font-serif text-[2.6rem] font-semibold leading-none tracking-tight">
-              ${Number(w.price).toFixed(2)}
+              ${PRICING.monthly.amount}
             </span>
-            <span className="text-xs text-[#a09880] mb-0.5">USD</span>
+            <span className="text-xs text-[#a09880] mb-0.5">/mo · or ${PRICING.lifetime.amount} lifetime</span>
           </div>
           <p className="text-[11px] text-[#a09880] mt-1.5 flex items-center gap-1">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <polyline points="20 6 9 17 4 12" />
             </svg>
-            Tax included · Instant download
+            Full-collection access · Instant download
             {packCount > 0 && <> · {packCount} wallpapers in this pack</>}
           </p>
         </div>
 
-        {/* Buttons */}
+        {/* Access CTA */}
         <div className="space-y-2.5 max-w-[320px]">
-          <button
-            onClick={handleBuyNow}
-            disabled={buying}
-            className="w-full bg-[#1c1a18] hover:bg-[#0e0d0c] text-[#f0e8d8] py-4 text-[11px] tracking-[0.18em] uppercase font-medium transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
-          >
-            {buying ? (
-              <>
-                <svg className="animate-spin w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
-                </svg>
-                Redirecting…
-              </>
-            ) : (
-              <>
+          {loading ? (
+            <div className="w-full py-4 bg-[#e6dbc8] animate-pulse" />
+          ) : hasAccess ? (
+            <>
+              <a
+                href={downloadUrl ?? undefined}
+                aria-disabled={!downloadUrl}
+                className={`w-full bg-[#1c1a18] hover:bg-[#0e0d0c] text-[#f0e8d8] py-4 text-[11px] tracking-[0.18em] uppercase font-medium transition-colors flex items-center justify-center gap-2 ${downloadUrl ? "" : "opacity-50 pointer-events-none"}`}
+              >
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect x="1" y="4" width="22" height="16" rx="2" />
-                  <line x1="1" y1="10" x2="23" y2="10" />
+                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
                 </svg>
-                Buy now
-              </>
-            )}
-          </button>
-
-          <button
-            onClick={handleAddToCart}
-            className="w-full border border-[#1c1a18] text-[#1c1a18] hover:bg-[#1c1a18] hover:text-[#f0e8d8] py-4 text-[11px] tracking-[0.18em] uppercase font-medium transition-all duration-200"
-          >
-            {added ? "Added to cart ✓" : "Add to cart"}
-          </button>
+                {downloadUrl ? "Download" : "Preparing…"}
+              </a>
+              <Link
+                href="/account"
+                className="block text-center w-full border border-[#1c1a18] text-[#1c1a18] hover:bg-[#1c1a18] hover:text-[#f0e8d8] py-4 text-[11px] tracking-[0.18em] uppercase font-medium transition-all duration-200"
+              >
+                Download entire collection
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/pricing"
+                className="block text-center w-full bg-[#1c1a18] hover:bg-[#0e0d0c] text-[#f0e8d8] py-4 text-[11px] tracking-[0.18em] uppercase font-medium transition-colors"
+              >
+                Get access
+              </Link>
+              {!user && (
+                <Link
+                  href="/login"
+                  className="block text-center w-full border border-[#1c1a18] text-[#1c1a18] hover:bg-[#1c1a18] hover:text-[#f0e8d8] py-4 text-[11px] tracking-[0.18em] uppercase font-medium transition-all duration-200"
+                >
+                  Sign in
+                </Link>
+              )}
+            </>
+          )}
         </div>
 
-        {/* Get-everything upsell — shown here in the buy column (not as a
-            banner at the bottom of the page) so it's visible up front. */}
-        {bundleCount !== undefined && bundleValue !== undefined && bundleCount > 0 && (
-          <BundleUpsellCard wallpaperCount={bundleCount} totalValue={bundleValue} />
-        )}
-
-        {/* Bundle nudge */}
+        {/* Membership nudge */}
         <div className="mt-5 max-w-[320px] border-l-2 border-[#c4b8a8] pl-3.5 py-1">
           <p className="text-[11px] text-[#7a7060] leading-relaxed">
-            <span className="font-semibold text-[#1c1a18]">Bundle discount:</span>{" "}
-            buy 2+ wallpapers and save 30–50% automatically at checkout.
+            <span className="font-semibold text-[#1c1a18]">One membership, everything:</span>{" "}
+            every wallpaper on Outbbo, plus new drops — from ${PRICING.monthly.amount}/mo.
           </p>
         </div>
 

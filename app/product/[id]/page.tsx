@@ -52,17 +52,7 @@ export default async function ProductPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const [w, allWallpapers] = await Promise.all([
-    getWallpaper(id).catch(() => null),
-    getWallpapers().catch(() => []),
-  ]);
+  const w = await getWallpaper(id).catch(() => null);
   if (!w) notFound();
-  const totalRetailValue = allWallpapers.reduce((s, wp) => s + Number(wp.price), 0);
-  return (
-    <ProductDetail
-      w={w}
-      bundleCount={allWallpapers.length}
-      bundleValue={totalRetailValue}
-    />
-  );
+  return <ProductDetail w={w} />;
 }
