@@ -19,8 +19,8 @@ export default function MembershipBanner({ wallpaperCount }: { wallpaperCount?: 
             )}
           </h2>
           <p className="text-xs text-[#c4b8a8]">
-            <span className="text-[#f0e8d8] font-medium">${PRICING.monthly.amount}/mo</span> for full access,
-            or <span className="text-[#f0e8d8] font-medium">${PRICING.lifetime.amount}</span> once for lifetime.
+            <span className="text-[#f0e8d8] font-medium">${PRICING.monthly.amount}/mo</span> unlocks every wallpaper,
+            or <span className="text-[#f0e8d8] font-medium">${PRICING.lifetime.amount}</span> once for lifetime access to all.
           </p>
         </div>
 

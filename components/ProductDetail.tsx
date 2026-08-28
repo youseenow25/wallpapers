@@ -109,7 +109,7 @@ export default function ProductDetail({
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <polyline points="20 6 9 17 4 12" />
             </svg>
-            Full-collection access · Instant download
+            ${PRICING.monthly.amount}/mo unlocks all wallpapers · Instant download
             {packCount > 0 && <> · {packCount} wallpapers in this pack</>}
           </p>
         </div>

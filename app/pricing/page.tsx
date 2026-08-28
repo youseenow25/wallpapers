@@ -19,10 +19,10 @@ const PLANS: {
     name: "Monthly",
     price: `$${PRICING.monthly.amount}`,
     period: "/month",
-    blurb: "Full access, billed monthly.",
+    blurb: "Access to all wallpapers, billed monthly.",
     perks: [
-      "Unlimited access to every wallpaper",
-      "Download the entire collection",
+      "Access to every wallpaper in the collection",
+      "Download any wallpaper, unlimited",
       "New wallpapers as they drop",
       "Cancel anytime",
     ],
