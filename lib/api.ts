@@ -45,7 +45,7 @@ export async function getWallpaper(id: number | string): Promise<Wallpaper> {
 // ── Membership pricing ────────────────────────────────────────────────────────
 
 export const PRICING = {
-  monthly: { amount: 5.99, label: "Monthly", period: "/mo" },
+  monthly: { amount: 4.99, label: "Monthly", period: "/mo" },
   lifetime: { amount: 24.99, label: "Lifetime", period: "one-time" },
 } as const;
 
