@@ -106,7 +106,7 @@ function AccountContent() {
         <div>
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-serif text-2xl font-semibold">Your collection</h2>
-            {downloads?.downloadAllUrl && (
+            {downloads?.downloadAllUrl && user.plan !== "monthly" && (
               <a href={downloads.downloadAllUrl} className="bg-[#1c1a18] text-[#f0e8d8] px-5 py-2.5 text-[11px] tracking-[0.18em] uppercase font-medium hover:bg-black transition-colors">
                 Download all
               </a>
