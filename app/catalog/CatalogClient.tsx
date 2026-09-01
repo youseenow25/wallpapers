@@ -38,9 +38,21 @@ export default function CatalogClient({ wallpapers: initialWallpapers }: { wallp
 
   const F1_PACK_ID = 196;
 
+  // The Complete Collection-2 batch (uploaded 2026-09-02) is pinned to the
+  // bottom of the catalog regardless of its newer created_at, in id order.
+  const BOTTOM_IDS = Array.from({ length: 35 }, (_, i) => 345 + i); // 345–379
+  const BOTTOM_ID_SET = new Set(BOTTOM_IDS);
+
   const sortByNewest = (list: Wallpaper[]) => {
     const f1Pack = list.find((w) => w.id === F1_PACK_ID);
-    const others = list.filter((w) => w.id !== F1_PACK_ID);
+
+    const bottom = list
+      .filter((w) => BOTTOM_ID_SET.has(w.id))
+      .sort((a, b) => a.id - b.id);
+
+    const others = list.filter(
+      (w) => w.id !== F1_PACK_ID && !BOTTOM_ID_SET.has(w.id),
+    );
 
     // Sort others by created_at descending (newest first)
     others.sort((a, b) => {
@@ -49,8 +61,8 @@ export default function CatalogClient({ wallpapers: initialWallpapers }: { wallp
       return dateB - dateA;
     });
 
-    // Put F1 pack first if it exists, then others
-    return f1Pack ? [f1Pack, ...others] : others;
+    // F1 pack first (if present), then newest-first, then the pinned bottom batch
+    return [...(f1Pack ? [f1Pack] : []), ...others, ...bottom];
   };
 
   const filtered = sortByNewest(
