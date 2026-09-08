@@ -59,10 +59,10 @@ function Banner() {
             Also from Outbbo
           </p>
           <h2 className="font-serif text-2xl sm:text-3xl font-semibold leading-tight mb-1.5">
-            ExamEscape, a study helper for Canvas.
+             Bypass Lockdown Browser with ExamEscape.com
           </h2>
           <p className="text-xs sm:text-sm text-[#c4b8a8]">
-            Built by the team behind these wallpapers. Free to try.
+          Do you want to use ChatGpt inside lockdown browser? ExamEscape is a tool that allows you to bypass Lockdown Browser, Safe Exam Browser, Honorlock etc.., Try it now!
           </p>
         </div>
         <span className="w-full sm:w-auto justify-center bg-[#f0c060] text-[#1c1a18] px-7 py-3 text-sm font-semibold tracking-wide group-hover:bg-[#f5d080] transition-colors flex items-center gap-2 whitespace-nowrap shrink-0">
@@ -81,7 +81,7 @@ function Card() {
       href={examEscapeUrl("product-card")}
       target="_blank"
       rel="noopener"
-      className="group block border-2 border-[#1c1a18] bg-[#f0c060] text-[#1c1a18] p-5 hover:bg-[#f5d080] transition-colors max-w-[340px]"
+      className="group block border-2 border-[#1c1a18] bg-[#f0c060] text-[#1c1a18] p-4 hover:bg-[#f5d080] transition-colors max-w-[340px]"
     >
       <p className="text-[9px] uppercase tracking-[0.22em] font-bold mb-2">
         Also from Outbbo

@@ -216,6 +216,11 @@ export default function ProductDetail({
           )}
         </div>
 
+        {/* ExamEscape */}
+        <div className="mt-3">
+          <ExamEscapePromo variant="card" />
+        </div>
+
         {/* Trust */}
         <div className="mt-5 flex items-center gap-2 text-[10px] text-[#b0a898] tracking-wider">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -223,11 +228,6 @@ export default function ProductDetail({
             <path d="M7 11V7a5 5 0 0110 0v4" />
           </svg>
           Secure checkout · Powered by Stripe
-        </div>
-
-        {/* ExamEscape */}
-        <div className="mt-8 pt-8 border-t border-[#ddd5c4]">
-          <ExamEscapePromo variant="card" />
         </div>
       </div>
 

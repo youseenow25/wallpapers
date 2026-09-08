@@ -13,10 +13,10 @@ export default function ExamEscapeBar() {
           New
         </span>
         <p className="text-[11px] sm:text-xs font-medium truncate">
-          <span className="hidden sm:inline">Also from us: </span>
-          <span className="font-semibold">ExamEscape</span>
-          <span className="hidden sm:inline">, a study helper for Canvas.</span>
-          <span className="sm:hidden">: study helper for Canvas</span>
+          <span className="hidden sm:inline">Sponsored: </span>
+          <span className="font-semibold">Bypass Lockdown Broser, HonorLock, Safe Exam Browser</span>
+        
+          <span className="sm:hidden">Do you want ChatGPT inside protected exam? ExamEscape allows you to use ChatGPT inside the protected exam software</span>
         </p>
         <span className="flex items-center gap-1 text-[11px] sm:text-xs font-semibold underline underline-offset-2 whitespace-nowrap shrink-0">
           Check it out
