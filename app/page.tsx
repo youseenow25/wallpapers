@@ -15,6 +15,9 @@ export default async function HomePage() {
       {/* Marquee hero */}
       <HeroMarquee wallpapers={wallpapers} />
 
+      {/* ExamEscape */}
+      <ExamEscapePromo variant="hero" />
+
       {/* Membership offer */}
       {wallpapers.length > 0 && (
         <MembershipBanner wallpaperCount={wallpapers.length} />
@@ -64,7 +67,6 @@ export default async function HomePage() {
         </section>
       )}
 
-      <ExamEscapePromo />
 
       {/* Footer */}
       <footer id="contact" className="border-t border-[#ddd5c4] px-6 py-10 mt-auto">

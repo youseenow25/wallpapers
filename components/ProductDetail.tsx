@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { coverUrl, framedCoverUrl, packImageUrl, getMemberDownloads, getToken, startMembershipCheckout, PRICING, type Plan } from "@/lib/api";
 import { packImageCount, type Wallpaper } from "@/lib/types";
 import { useAuth } from "./AuthContext";
+import ExamEscapePromo from "./ExamEscapePromo";
 
 export default function ProductDetail({
   w,
@@ -222,6 +223,11 @@ export default function ProductDetail({
             <path d="M7 11V7a5 5 0 0110 0v4" />
           </svg>
           Secure checkout · Powered by Stripe
+        </div>
+
+        {/* ExamEscape */}
+        <div className="mt-8 pt-8 border-t border-[#ddd5c4]">
+          <ExamEscapePromo variant="card" />
         </div>
       </div>
 
