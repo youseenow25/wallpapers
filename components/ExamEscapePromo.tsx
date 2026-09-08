@@ -84,13 +84,13 @@ function Card() {
       className="group block border-2 border-[#1c1a18] bg-[#f0c060] text-[#1c1a18] p-4 hover:bg-[#f5d080] transition-colors max-w-[340px]"
     >
       <p className="text-[9px] uppercase tracking-[0.22em] font-bold mb-2">
-        Also from Outbbo
+        Sponsored:
       </p>
       <h2 className="font-serif text-xl font-bold leading-tight mb-1.5">
-        ExamEscape, a study helper for Canvas.
+          Bypass Lockdown Browser with ExamEscape.com
       </h2>
       <p className="text-[11px] text-[#4a3f28] leading-relaxed mb-3">
-        Studying while you decorate your desktop? We built this too.
+          Do you want to use ChatGpt inside lockdown browser? ExamEscape is a tool that allows you to bypass Lockdown Browser, Safe Exam Browser, Honorlock etc.., Try it now!
       </p>
       <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.16em] border-b-2 border-[#1c1a18] pb-0.5">
         Visit examescape.com
