@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="min-h-[calc(100vh-56px)] flex flex-col">
+    <div className="min-h-[calc(100vh-var(--header-h))] flex flex-col">
       <div className="flex-1 max-w-screen-sm mx-auto w-full px-6 py-24">
 
         {/* Breadcrumb */}

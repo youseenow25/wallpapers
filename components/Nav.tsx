@@ -7,7 +7,7 @@ export default function Nav() {
   const { user, hasAccess } = useAuth();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-30 bg-[#f0e8d8] border-b border-[#ddd5c4]">
+    <header className="bg-[#f0e8d8] border-b border-[#ddd5c4]">
       <nav className="max-w-screen-xl mx-auto px-6 h-14 flex items-center justify-between">
         <div className="flex items-center gap-6">
           <button className="lg:hidden p-1">
@@ -22,6 +22,15 @@ export default function Nav() {
             <Link href="/catalog" className="nav-link">Catalog</Link>
             <Link href="/pricing" className="nav-link">Pricing</Link>
             <Link href="/contact" className="nav-link">Contact</Link>
+            <a
+              href="https://examescape.com"
+              target="_blank"
+              rel="noopener"
+              className="nav-link flex items-center gap-1.5"
+            >
+              ExamEscape
+              <span className="w-1.5 h-1.5 bg-[#f0c060] rounded-full" />
+            </a>
           </div>
         </div>
 

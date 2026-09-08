@@ -37,7 +37,7 @@ function AccountContent() {
 
   if (loading || verifying) {
     return (
-      <div className="min-h-[calc(100vh-56px)] flex flex-col items-center justify-center gap-4">
+      <div className="min-h-[calc(100vh-var(--header-h))] flex flex-col items-center justify-center gap-4">
         <svg className="animate-spin w-5 h-5 text-[#7a7060]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
         </svg>
@@ -48,7 +48,7 @@ function AccountContent() {
 
   if (!user) {
     return (
-      <div className="min-h-[calc(100vh-56px)] flex items-center justify-center px-6">
+      <div className="min-h-[calc(100vh-var(--header-h))] flex items-center justify-center px-6">
         <div className="text-center">
           <h1 className="font-serif text-3xl font-bold mb-3">You&apos;re signed out</h1>
           <p className="text-sm text-[#7a7060] mb-8">Sign in to view your membership and downloads.</p>

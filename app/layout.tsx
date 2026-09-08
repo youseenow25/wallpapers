@@ -4,6 +4,7 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { AuthProvider } from "@/components/AuthContext";
 import Nav from "@/components/Nav";
+import ExamEscapeBar from "@/components/ExamEscapeBar";
 import ExamEscapeStrip from "@/components/ExamEscapeStrip";
 
 const playfair = Playfair_Display({
@@ -43,8 +44,11 @@ export default function RootLayout({
     <html lang="en" className={`${playfair.variable} ${dmSans.variable}`}>
       <body>
         <AuthProvider>
-          <Nav />
-          <main className="pt-14">{children}</main>
+          <div className="fixed top-0 left-0 right-0 z-30">
+            <ExamEscapeBar />
+            <Nav />
+          </div>
+          <main className="pt-[var(--header-h)]">{children}</main>
           <ExamEscapeStrip />
         </AuthProvider>
         <Analytics />

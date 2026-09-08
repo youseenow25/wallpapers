@@ -30,7 +30,7 @@ function LoginForm() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-56px)] flex items-center justify-center px-6 py-20">
+    <div className="min-h-[calc(100vh-var(--header-h))] flex items-center justify-center px-6 py-20">
       <div className="w-full max-w-sm">
         <h1 className="font-serif text-3xl font-bold mb-1">Sign in</h1>
         <p className="text-sm text-[#7a7060] mb-8">Access your membership and downloads.</p>

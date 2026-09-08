@@ -68,7 +68,7 @@ export default function ProductDetail({
   }
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-[calc(100vh-56px)]">
+    <div className="flex flex-col lg:flex-row min-h-[calc(100vh-var(--header-h))]">
 
       {/* ── Left ─────────────────────────────────────────────────────────── */}
       <div className="lg:w-[42%] flex flex-col justify-center px-8 lg:px-16 py-16 lg:py-12 lg:overflow-y-auto">

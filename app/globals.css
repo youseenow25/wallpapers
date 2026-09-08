@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  --header-h: 92px;
   --cream: #f0e8d8;
   --cream-dark: #e4d9c4;
   --text: #1c1a18;

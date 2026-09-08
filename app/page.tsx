@@ -3,6 +3,7 @@ import { getWallpapers } from "@/lib/api";
 import ProductCard from "@/components/ProductCard";
 import HeroMarquee from "@/components/HeroMarquee";
 import MembershipBanner from "@/components/MembershipBanner";
+import ExamEscapePromo from "@/components/ExamEscapePromo";
 
 export default async function HomePage() {
   const wallpapers = await getWallpapers().catch(() => []);
@@ -62,6 +63,8 @@ export default async function HomePage() {
           </div>
         </section>
       )}
+
+      <ExamEscapePromo />
 
       {/* Footer */}
       <footer id="contact" className="border-t border-[#ddd5c4] px-6 py-10 mt-auto">
