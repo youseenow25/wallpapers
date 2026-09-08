@@ -1,7 +1,9 @@
+import { examEscapeUrl } from "@/lib/examescape";
+
 export default function ExamEscapeBar() {
   return (
     <a
-      href="https://examescape.com"
+      href={examEscapeUrl("top-bar")}
       target="_blank"
       rel="noopener"
       className="group block bg-[#f0c060] text-[#1c1a18] hover:bg-[#f5d080] transition-colors"
@@ -11,10 +13,10 @@ export default function ExamEscapeBar() {
           New
         </span>
         <p className="text-[11px] sm:text-xs font-medium truncate">
-          <span className="hidden sm:inline">Also from us — </span>
+          <span className="hidden sm:inline">Also from us: </span>
           <span className="font-semibold">ExamEscape</span>
           <span className="hidden sm:inline">, a study helper for Canvas.</span>
-          <span className="sm:hidden"> — study helper for Canvas</span>
+          <span className="sm:hidden">: study helper for Canvas</span>
         </p>
         <span className="flex items-center gap-1 text-[11px] sm:text-xs font-semibold underline underline-offset-2 whitespace-nowrap shrink-0">
           Check it out

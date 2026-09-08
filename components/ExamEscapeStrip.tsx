@@ -1,3 +1,5 @@
+import { examEscapeUrl } from "@/lib/examescape";
+
 export default function ExamEscapeStrip() {
   return (
     <aside className="border-t border-[#ddd5c4] bg-[#e9e1d0] px-6 py-3">
@@ -8,16 +10,16 @@ export default function ExamEscapeStrip() {
         <span className="hidden sm:inline text-[#c4b8a8]">·</span>
         <p className="text-xs text-[#7a7060]">
           <a
-            href="https://examescape.com"
+            href={examEscapeUrl("footer-strip")}
             target="_blank"
             rel="noopener"
             className="font-medium text-[#1c1a18] hover:opacity-60 transition-opacity"
           >
             ExamEscape
           </a>
-          {" — a study helper for Canvas."}{" "}
+          {", a study helper for Canvas."}{" "}
           <a
-            href="https://examescape.com"
+            href={examEscapeUrl("footer-strip")}
             target="_blank"
             rel="noopener"
             className="underline underline-offset-2 decoration-[#c4b8a8] hover:text-[#1c1a18] transition-colors whitespace-nowrap"

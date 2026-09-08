@@ -1,4 +1,4 @@
-const URL = "https://examescape.com";
+import { examEscapeUrl } from "@/lib/examescape";
 
 const ArrowOut = ({ size = 16 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -17,7 +17,7 @@ function Hero() {
             Also from Outbbo
           </p>
           <h2 className="font-serif text-4xl sm:text-5xl lg:text-[3.5rem] font-bold leading-[1.05] tracking-tight mb-4">
-            ExamEscape — your study
+            ExamEscape, your study
             <br className="hidden sm:block" /> helper for Canvas.
           </h2>
           <p className="text-sm sm:text-base leading-relaxed max-w-lg text-[#4a3f28]">
@@ -28,7 +28,7 @@ function Hero() {
 
         <div className="w-full lg:w-auto flex flex-col items-stretch lg:items-end gap-2 shrink-0">
           <a
-            href={URL}
+            href={examEscapeUrl("home-hero")}
             target="_blank"
             rel="noopener"
             className="w-full lg:w-auto justify-center bg-[#1c1a18] text-[#f0e8d8] px-10 py-4 text-sm font-semibold tracking-wide hover:bg-black transition-colors flex items-center gap-2 whitespace-nowrap"
@@ -49,7 +49,7 @@ function Hero() {
 function Banner() {
   return (
     <a
-      href={URL}
+      href={examEscapeUrl("catalog-banner")}
       target="_blank"
       rel="noopener"
       className="group block bg-[#1c1a18] text-[#f0e8d8] hover:bg-[#0e0d0c] transition-colors mb-10"
@@ -60,7 +60,7 @@ function Banner() {
             Also from Outbbo
           </p>
           <h2 className="font-serif text-2xl sm:text-3xl font-semibold leading-tight mb-1.5">
-            ExamEscape — a study helper for Canvas.
+            ExamEscape, a study helper for Canvas.
           </h2>
           <p className="text-xs sm:text-sm text-[#c4b8a8]">
             Built by the team behind these wallpapers. Free to try.
@@ -79,7 +79,7 @@ function Banner() {
 function Card() {
   return (
     <a
-      href={URL}
+      href={examEscapeUrl("product-card")}
       target="_blank"
       rel="noopener"
       className="group block border-2 border-[#1c1a18] bg-[#f0c060] text-[#1c1a18] p-5 hover:bg-[#f5d080] transition-colors max-w-[340px]"
@@ -88,7 +88,7 @@ function Card() {
         Also from Outbbo
       </p>
       <h2 className="font-serif text-xl font-bold leading-tight mb-1.5">
-        ExamEscape — a study helper for Canvas.
+        ExamEscape, a study helper for Canvas.
       </h2>
       <p className="text-[11px] text-[#4a3f28] leading-relaxed mb-3">
         Studying while you decorate your desktop? We built this too.

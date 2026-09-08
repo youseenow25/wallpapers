@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useAuth } from "./AuthContext";
+import { examEscapeUrl } from "@/lib/examescape";
 
 export default function Nav() {
   const { user, hasAccess } = useAuth();
@@ -23,7 +24,7 @@ export default function Nav() {
             <Link href="/pricing" className="nav-link">Pricing</Link>
             <Link href="/contact" className="nav-link">Contact</Link>
             <a
-              href="https://examescape.com"
+              href={examEscapeUrl("nav")}
               target="_blank"
               rel="noopener"
               className="nav-link flex items-center gap-1.5"
