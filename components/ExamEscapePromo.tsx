@@ -17,12 +17,11 @@ function Hero() {
             Also from Outbbo
           </p>
           <h2 className="font-serif text-4xl sm:text-5xl lg:text-[3.5rem] font-bold leading-[1.05] tracking-tight mb-4">
-            ExamEscape, your study
-            <br className="hidden sm:block" /> helper for Canvas.
+           Bypass Lockdown Browser with ExamEscape.com
+       
           </h2>
           <p className="text-sm sm:text-base leading-relaxed max-w-lg text-[#4a3f28]">
-            If you use Canvas for coursework, ExamEscape is built to make
-            studying faster and a lot less painful.
+            Do you want to use ChatGpt inside lockdown browser? ExamEscape is a tool that allows you to bypass Lockdown Browser, Safe Exam Browser, Honorlock etc.., Try it now!
           </p>
         </div>
 
