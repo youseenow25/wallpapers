@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useAuth } from "./AuthContext";
-import { examEscapeUrl } from "@/lib/examescape";
+// import { examEscapeUrl } from "@/lib/examescape";
 
 export default function Nav() {
   const { user, hasAccess } = useAuth();
@@ -23,7 +23,7 @@ export default function Nav() {
             <Link href="/catalog" className="nav-link">Catalog</Link>
             <Link href="/pricing" className="nav-link">Pricing</Link>
             <Link href="/contact" className="nav-link">Contact</Link>
-            <a
+            {/* <a
               href={examEscapeUrl("nav")}
               target="_blank"
               rel="noopener"
@@ -31,7 +31,7 @@ export default function Nav() {
             >
               ExamEscape
               <span className="w-1.5 h-1.5 bg-[#f0c060] rounded-full" />
-            </a>
+            </a> */}
           </div>
         </div>
 

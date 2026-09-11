@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { coverUrl, framedCoverUrl, packImageUrl, getMemberDownloads, getToken, startMembershipCheckout, PRICING, type Plan } from "@/lib/api";
 import { packImageCount, type Wallpaper } from "@/lib/types";
 import { useAuth } from "./AuthContext";
-import ExamEscapePromo from "./ExamEscapePromo";
+// import ExamEscapePromo from "./ExamEscapePromo";
 
 export default function ProductDetail({
   w,
@@ -217,9 +217,9 @@ export default function ProductDetail({
         </div>
 
         {/* ExamEscape */}
-        <div className="mt-3">
+        {/* <div className="mt-3">
           <ExamEscapePromo variant="card" />
-        </div>
+        </div> */}
 
         {/* Trust */}
         <div className="mt-5 flex items-center gap-2 text-[10px] text-[#b0a898] tracking-wider">

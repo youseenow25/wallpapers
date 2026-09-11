@@ -3,7 +3,7 @@ import { getWallpapers } from "@/lib/api";
 import ProductCard from "@/components/ProductCard";
 import HeroMarquee from "@/components/HeroMarquee";
 import MembershipBanner from "@/components/MembershipBanner";
-import ExamEscapePromo from "@/components/ExamEscapePromo";
+// import ExamEscapePromo from "@/components/ExamEscapePromo";
 
 export default async function HomePage() {
   const wallpapers = await getWallpapers().catch(() => []);
@@ -16,7 +16,7 @@ export default async function HomePage() {
       <HeroMarquee wallpapers={wallpapers} />
 
       {/* ExamEscape */}
-      <ExamEscapePromo variant="hero" />
+      {/* <ExamEscapePromo variant="hero" /> */}
 
       {/* Membership offer */}
       {wallpapers.length > 0 && (

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import type { Wallpaper } from "@/lib/types";
 import ProductCard from "@/components/ProductCard";
-import ExamEscapePromo from "@/components/ExamEscapePromo";
+// import ExamEscapePromo from "@/components/ExamEscapePromo";
 
 const COLLAPSED_TAG_COUNT = 6;
 
@@ -81,7 +81,7 @@ export default function CatalogClient({ wallpapers: initialWallpapers }: { wallp
         <p className="text-sm text-[#7a7060]">{wallpapers.length} wallpapers</p>
       </div>
 
-      <ExamEscapePromo variant="banner" />
+      {/* <ExamEscapePromo variant="banner" /> */}
 
       <div className="flex flex-wrap gap-2 mb-10">
         <button
