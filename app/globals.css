@@ -112,12 +112,46 @@ body {
   flex-wrap: nowrap;
   width: max-content;
   gap: 20px;
-  padding: 0 10px;
-  animation: marquee-scroll 70s linear infinite;
+  /* One full (non-duplicated) set scrolls past over this duration. */
+  animation: marquee-scroll 60s linear infinite;
   will-change: transform;
 }
+.marquee-card {
+  display: block;
+  flex-shrink: 0;
+  width: 260px;
+  height: 170px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.marquee-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 .marquee-outer:hover .marquee-track { animation-play-state: paused; }
+
+/* GPU-composited transform keeps the scroll smooth instead of janking on
+   the main thread — the duplicated second set means -50% loops seamlessly. */
 @keyframes marquee-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+/* Smaller cards on mobile so fewer/lighter pixels move, and a longer duration
+   so the shorter track doesn't fly past. */
+@media (max-width: 640px) {
+  .marquee-track {
+    gap: 12px;
+    animation-duration: 75s;
+  }
+  .marquee-card {
+    width: 180px;
+    height: 118px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
 }

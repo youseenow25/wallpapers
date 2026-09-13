@@ -5,7 +5,12 @@ import { coverUrl } from "@/lib/api";
 export default function HeroMarquee({ wallpapers }: { wallpapers: Wallpaper[] }) {
   if (!wallpapers.length) return null;
 
-  const items = [...wallpapers, ...wallpapers];
+  // Only feed a handful of images into the strip. Rendering every wallpaper
+  // (100+) makes the track enormous, which both scrolls far too fast for the
+  // fixed animation duration and janks badly on mobile. A capped set keeps the
+  // speed consistent and the animation lightweight.
+  const strip = wallpapers.slice(0, 12);
+  const items = [...strip, ...strip];
 
   return (
     <section className="border-b border-[#ddd5c4]">
@@ -35,14 +40,15 @@ export default function HeroMarquee({ wallpapers }: { wallpapers: Wallpaper[] })
             <Link
               key={`${w.id}-${i}`}
               href={`/product/${w.id}`}
-              className="group flex-shrink-0 overflow-hidden"
-              style={{ width: "260px", height: "170px", display: "block", borderRadius: "6px" }}
+              className="marquee-card group"
+              aria-hidden={i >= strip.length}
+              tabIndex={i >= strip.length ? -1 : undefined}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={coverUrl(w.id)}
                 alt={w.title}
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                loading="lazy"
                 className="group-hover:scale-105 transition-transform duration-500"
               />
             </Link>

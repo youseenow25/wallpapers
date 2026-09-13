@@ -11,7 +11,8 @@ export default function ProductCard({ w }: { w: Wallpaper }) {
         <img
           src={coverUrl(w.id)}
           alt={w.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
         {packCount > 0 && (
           <span className="absolute top-2 left-2 bg-[#1c1a18]/90 text-[#f0e8d8] text-[9px] font-medium uppercase tracking-[0.18em] px-2.5 py-1">
