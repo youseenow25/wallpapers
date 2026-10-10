@@ -4,10 +4,8 @@ const API =
   process.env.NEXT_PUBLIC_API_URL ||
   (typeof window === "undefined" ? "http://localhost:4000" : "");
 
-const CDN = "https://d2e5alblmbpd9l.cloudfront.net";
-
 export function coverUrl(id: number | string): string {
-  return `${CDN}/framed/${id}.jpg`;
+  return `${API}/api/covers/${id}/framed`;
 }
 
 export function framedCoverUrl(id: number | string, imgIdx?: number): string {
