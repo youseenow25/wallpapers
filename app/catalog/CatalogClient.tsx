@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useState } from "react";
 import type { Wallpaper } from "@/lib/types";
 import ProductCard from "@/components/ProductCard";
 // import ExamEscapePromo from "@/components/ExamEscapePromo";
@@ -9,23 +8,10 @@ import ProductCard from "@/components/ProductCard";
 const COLLAPSED_TAG_COUNT = 6;
 
 export default function CatalogClient({ wallpapers: initialWallpapers }: { wallpapers: Wallpaper[] }) {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const [type, setType] = useState<string>("desktop");
   const [tag, setTag] = useState<string>("all");
   const [showAllTags, setShowAllTags] = useState(false);
 
-  useEffect(() => {
-    const typeParam = searchParams.get("type");
-    if (typeParam && ["all", "desktop"].includes(typeParam)) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setType(typeParam);
-    }
-  }, [searchParams]);
-
-  const wallpapers = type === "all"
-    ? initialWallpapers
-    : initialWallpapers.filter(w => w.type === type);
+  const wallpapers = initialWallpapers;
 
   const allTags = Array.from(
     new Set(
@@ -82,29 +68,6 @@ export default function CatalogClient({ wallpapers: initialWallpapers }: { wallp
       </div>
 
       {/* <ExamEscapePromo variant="banner" /> */}
-
-      <div className="flex flex-wrap gap-2 mb-10">
-        <button
-          onClick={() => { setType("all"); setTag("all"); router.push("?type=all"); }}
-          className={`text-xs uppercase tracking-widest px-3 py-1.5 border transition-colors font-semibold ${
-            type === "all"
-              ? "bg-[#1c1a18] text-[#f0e8d8] border-[#1c1a18]"
-              : "border-[#ddd5c4] text-[#7a7060] hover:border-[#7a7060]"
-          }`}
-        >
-          All Wallpapers
-        </button>
-        <button
-          onClick={() => { setType("desktop"); setTag("all"); router.push("?type=desktop"); }}
-          className={`text-xs uppercase tracking-widest px-3 py-1.5 border transition-colors font-semibold ${
-            type === "desktop"
-              ? "bg-[#1c1a18] text-[#f0e8d8] border-[#1c1a18]"
-              : "border-[#ddd5c4] text-[#7a7060] hover:border-[#7a7060]"
-          }`}
-        >
-          Desktop
-        </button>
-      </div>
 
       {allTags.length > 0 && (
         <div className="flex flex-wrap gap-2 mb-10">
